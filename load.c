@@ -112,25 +112,6 @@ void loadFile(char*filename){
     initStaticUserList(&userList);
     FILE *file = fopen(filepath, "r");
     if (file != NULL){
-        int itemCount;
-        int userCount;
-        fscanf(file, "%d", &itemCount);
-        for(int i = 0; i < itemCount; i++){
-            int price;
-            char name[MAX_LEN];
-            fscanf(file, "%d", &price);
-            fgetc(file);
-            readline(file, name);
-            addItem(&itemList, price, name);
-        }
-        fscanf(file, "%d", &userCount);
-        for (int i = 0; i < userCount; i++){
-            int money;
-            char user[MAX_LEN];
-            char pass[MAX_LEN];
-            fscanf(file, "%d %s %s", &money, user, pass);
-            addUser(&userList, money, user, pass);
-        }
         display(&itemList, &userList);
         printf("Save file berhasil dibaca. PURRMART berhasil dijalankan.\n");
         fclose(file);
@@ -142,9 +123,9 @@ void loadFile(char*filename){
 }
 
 
-/*
 
-int main(){
+
+/*int main(){
     char input[MAX_LEN];
     char namafile[MAX_LEN];
     readline(stdin, input);
@@ -164,4 +145,3 @@ int main(){
     loadFile(namafile);
 }
 */
-
