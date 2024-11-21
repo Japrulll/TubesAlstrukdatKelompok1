@@ -1,0 +1,3 @@
+ak47 7000
+bazooka 8000
+airsupply 11999
