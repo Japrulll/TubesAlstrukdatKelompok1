@@ -25,6 +25,9 @@ typedef struct {
     int capacity;
 } DinamicItemList;
 
+
+/*fungsi copyString berfungsi untuk menyalin string dari source ke destination
+sebagai pengganti strcpy*/
 void copyString(char* src, char* dest){
     int i = 0;
     while(src[i] != '\0'){
@@ -34,16 +37,27 @@ void copyString(char* src, char* dest){
     dest[i] = '\0';
 }
 
+
+/*fungsi iniStaticUserList berfungsi untuk menginisialisasi
+struktur data StaticUserList, dibuat daftar kosong*/
 void initStaticUserList(StaticUserList *list){
     list->count = 0;
 }
 
+
+/*fungsi initDinamicItemList berfungsi untuk menginisialisasi
+struktur data DinamicItemList dengan keterangan mengalokasikan
+memori awal array items dengan kapasitas awal 2 dan count 0*/
 void initDinamicItemList(DinamicItemList *list){
     list->capacity = 2;
     list->count = 0;
     list->items = (Barang*)malloc(list->capacity * sizeof(Barang));
 }
 
+
+/*fungsi addUser berfungsi untuk menambahkan user baru ke dalam StaticUserList
+dengan memastikan jumlah pengguna tidak melebihi batas yang sudah di-define (MAX_LEN)
+dan menyimpan data money,name,dan password ke dalam struktur User yang ada di array users*/
 void addUser(StaticUserList *list, int money, char*name, char*password){
     if(list->count < 100){
         list->users[list->count].money = money;
@@ -55,6 +69,11 @@ void addUser(StaticUserList *list, int money, char*name, char*password){
         printf("error user list sudah penuh.\n");
     }
 }
+
+
+/*fungsi addItem berfungsi untuk menambahkan barang ke dalam DinamicItemList
+jika count barang melebihi kapasitas maka akan diperbesar ukuran array dengan cara 
+reallocate */
 void addItem(DinamicItemList *list, int price, char*name){
     if(list->count == list->capacity){
         list->capacity *= 2;
@@ -65,12 +84,17 @@ void addItem(DinamicItemList *list, int price, char*name){
     list->count++;
 }
 
+
+/*fungsi freeDinamicItemList berfungsi untuk menghapus memori yang telah dialokasikan
+secara dinamis untuk DinamicItemList, supaya memorinya tidak terbuang sia-sia dan bisa digunakan lagi*/
 void freeDinamicItemList(DinamicItemList *list){
     free(list->items);
     list->items = NULL;
     list->capacity = 0;
     list->count = 0;
 }
+
+/*fungsi constructfilepath berfungsi untuk menggabungkan dua string dan membentuk path file*/
 void constructfilepath(char*filepath, char*basepath, char*filename){
     int i = 0;
     while(basepath[i] != '\0'){
@@ -85,6 +109,8 @@ void constructfilepath(char*filepath, char*basepath, char*filename){
     }
     filepath[i] = '\0';
 }
+
+/*fungsi untuk menampilkan isi daftar barang dan user ke layar*/
 void display(DinamicItemList *itemlist, StaticUserList *userlist){
     for (int i = 0; i < itemlist->count; i++){
         printf("%d %s\n", itemlist->items[i].price, itemlist->items[i].name);
@@ -94,6 +120,7 @@ void display(DinamicItemList *itemlist, StaticUserList *userlist){
     }
 }
 
+/*fungsi readline berfungsi untuk membaca file ke buffer string*/
 void readline(FILE *file, char *buffer){
     int i = 0;
     char c;
@@ -103,6 +130,10 @@ void readline(FILE *file, char *buffer){
     }
     buffer[i] = '\0';
 }
+
+/*fungsi ini berfungsi untuk membaca file dengan nama file yang diberikan
+parameter filename. Apabila berhasil, maka akan diberitahu bahwa save file berhasil terbaca.
+Apabila tidak berhasil, maka akan diberitahu bahwa save file tidak berhasil terbaca.*/
 void loadFile(char*filename){
     char filepath[300];
     constructfilepath(filepath, "./save/", filename);
@@ -112,6 +143,28 @@ void loadFile(char*filename){
     initStaticUserList(&userList);
     FILE *file = fopen(filepath, "r");
     if (file != NULL){
+        
+        //bagian ini adalah hanya testing untuk melihat apakah semua isi dalam file sudah terbaca atau tidak
+        /*int itemCount;
+        int userCount;
+        fscanf(file, "%d", &itemCount);
+        for(int i = 0; i < itemCount; i++){
+            int price;
+            char name[MAX_LEN];
+            fscanf(file, "%d", &price);
+            fgetc(file);
+            readline(file, name);
+            addItem(&itemList, price, name);
+        }
+        fscanf(file, "%d", &userCount);
+        for (int i = 0; i < userCount; i++){
+            int money;
+            char user[MAX_LEN];
+            char pass[MAX_LEN];
+            fscanf(file, "%d %s %s", &money, user, pass);
+            addUser(&userList, money, user, pass);
+        }
+        */
         display(&itemList, &userList);
         printf("Save file berhasil dibaca. PURRMART berhasil dijalankan.\n");
         fclose(file);
@@ -121,7 +174,6 @@ void loadFile(char*filename){
     }
 
 }
-
 
 
 
@@ -143,5 +195,4 @@ void loadFile(char*filename){
     namafile[j] = '\0';
     //printf("%s", namafile);
     loadFile(namafile);
-}
-*/
+}*/
