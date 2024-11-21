@@ -21,7 +21,7 @@ void display_list(char *path){
 
 // int main() {
 //     // Path file sebagai input
-//     char path[] = "Barang.txt";
+//     char path[] = "barang.txt";
 //     display_list(path);
 //     return 0;
 // }
