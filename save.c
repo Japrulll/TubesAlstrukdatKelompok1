@@ -1,30 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define MAX_LEN 100
-
-typedef struct {
-    char name[MAX_LEN];
-    char password[MAX_LEN];
-    int money;
-} User;
-
-typedef struct {
-    char name[MAX_LEN];
-    int price;
-} Barang;
-
-typedef struct {
-    User users[MAX_LEN];
-    int count;
-} StaticUserList;
-
-typedef struct {
-    Barang *items;
-    int count;
-    int capacity;
-} DinamicItemList;
-
+#include "save.h"
 
 /*fungsi copyString berfungsi untuk menyalin string dari source ke destination
 sebagai pengganti strcpy*/
