@@ -44,4 +44,9 @@ void mainMenu();
 /* I.S. Program PURRMART aktif */
 /* F.S. Pengguna memilih opsi dan fungsi terkait dijalankan sesuai pilihan */
 
+int main();
+/* Fungsi utama untuk menjalankan program PURRMART */
+/* I.S. Program PURRMART belum berjalan */
+/* F.S. Menu utama tampil dan pengguna dapat memilih opsi untuk register, login, logout, atau keluar dari program */
+
 #endif
