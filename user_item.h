@@ -67,4 +67,8 @@ void constructfilepath(char*filepath, char*basepath, char*filename);
 void readline(FILE *file, char *buffer);
 /*fungsi readline berfungsi untuk membaca file ke buffer string*/
 
+void writeToFile(FILE *file, DinamicItemList *itemList, StaticUserList *userList);
+/*fungsi ini berfungsi untuk menyimpan data dari DinamicItemList dan StaticUserList ke file
+ditulis detail barang dan detail user ke file*/
+
 #endif
