@@ -10,7 +10,6 @@ typedef struct {
     int currentLength;                
 } MesinKata;
 
-// Fungsi untuk memulai mesin kata
 void startMesinKata(MesinKarakter *mk, MesinKata *mK);
 /* Memulai pembacaan kata dari mesin karakter */
 /* I.S. Mesin karakter telah diinisialisasi dan siap digunakan */
