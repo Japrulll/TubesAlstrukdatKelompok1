@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "save.h"
 
-/*fungsi copyString berfungsi untuk menyalin string dari source ke destination
-sebagai pengganti strcpy*/
 void copyString(char* src, char* dest){
     int i = 0;
     while(src[i] != '\0'){
@@ -13,25 +11,16 @@ void copyString(char* src, char* dest){
     dest[i] = '\0';
 }
 
-
-/*fungsi iniStaticUserList berfungsi untuk menginisialisasi
-struktur data StaticUserList, dibuat daftar kosong*/
 void initStaticUserList(StaticUserList *list){
     list->count = 0;
 }
 
-/*fungsi initDinamicItemList berfungsi untuk menginisialisasi
-struktur data DinamicItemList dengan keterangan mengalokasikan
-memori awal array items dengan kapasitas awal 2 dan count 0*/
 void initDinamicItemList(DinamicItemList *list){
     list->capacity = 2;
     list->count = 0;
     list->items = (Barang*)malloc(list->capacity * sizeof(Barang));
 }
 
-/*fungsi addUser berfungsi untuk menambahkan user baru ke dalam StaticUserList
-dengan memastikan jumlah pengguna tidak melebihi batas yang sudah di-define (MAX_LEN)
-dan menyimpan data money,name,dan password ke dalam struktur User yang ada di array users*/
 void addUser(StaticUserList *list, int money, char*name, char*password){
     if(list->count < 100){
         list->users[list->count].money = money;
@@ -44,9 +33,6 @@ void addUser(StaticUserList *list, int money, char*name, char*password){
     }
 }
 
-/*fungsi addItem berfungsi untuk menambahkan barang ke dalam DinamicItemList
-jika count barang melebihi kapasitas maka akan diperbesar ukuran array dengan cara 
-reallocate */
 void addItem(DinamicItemList *list, int price, char*name){
     if(list->count == list->capacity){
         list->capacity *= 2;
@@ -57,15 +43,13 @@ void addItem(DinamicItemList *list, int price, char*name){
     list->count++;
 }
 
-/*fungsi freeDinamicItemList berfungsi untuk menghapus memori yang telah dialokasikan
-secara dinamis untuk DinamicItemList, supaya memorinya tidak terbuang sia-sia dan bisa digunakan lagi*/
 void freeDinamicItemList(DinamicItemList *list){
     free(list->items);
     list->items = NULL;
     list->capacity = 0;
     list->count = 0;
 }
-//fungsi constructfilepath berfungsi untuk menggabungkan dua string dan membentuk path file*/
+
 void constructfilepath(char*filepath, char*basepath, char*filename){
     int i = 0;
     while(basepath[i] != '\0'){
@@ -81,8 +65,6 @@ void constructfilepath(char*filepath, char*basepath, char*filename){
     filepath[i] = '\0';
 }
 
-
-/*fungsi untuk menampilkan isi daftar barang dan user ke layar*/
 void display(DinamicItemList *itemlist, StaticUserList *userlist){
     for (int i = 0; i < itemlist->count; i++){
         printf("%d %s\n", itemlist->items[i].price, itemlist->items[i].name);
@@ -92,8 +74,6 @@ void display(DinamicItemList *itemlist, StaticUserList *userlist){
     }
 }
 
-
-/*fungsi readline berfungsi untuk membaca file ke buffer string*/
 void readline(FILE *file, char *buffer){
     int i = 0;
     char c;
@@ -104,8 +84,6 @@ void readline(FILE *file, char *buffer){
     buffer[i] = '\0';
 }
 
-/*fungsi ini berfungsi untuk menyimpan data dari DinamicItemList dan StaticUserList ke file
-ditulis detail barang dan detail user ke file*/
 void writeToFile(FILE *file, DinamicItemList *itemList, StaticUserList *userList){
     if (file != NULL){
         fprintf(file, "%d\n", itemList->count);
@@ -133,8 +111,6 @@ void populateList(DinamicItemList *itemList, StaticUserList *userList){
 }
 */
 
-
-/*fungsi ini berfungsi untuk save file data*/
 void savefilename(char* filename){
     char filepath[300];
     constructfilepath(filepath, "./save/", filename);
