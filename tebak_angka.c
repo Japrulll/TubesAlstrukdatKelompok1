@@ -15,16 +15,17 @@ int generate_random_number() {
 int CharToInt() {
     int tebak = 0;
 
-    STARTWORD();
-    while ( !EndWord ) {
-        ADVWORD();
-    }
+    MesinKarakter m;
+    MesinKata M;
+    startMesinKarakter(&m,stdin);
+    startMesinKata(&m,&M);
 
-    for (int i=0; i<CurrentWord.Length;i++) {
-        if (CurrentWord.TabWord[i]<'0' || CurrentWord.TabWord[i]>'9' ){
+
+    for (int i=0; i<M.currentLength;i++) {
+        if (M.currentWord[i]<'0' || M.currentWord[i]>'9' ){
             return -1;
         }
-        tebak = tebak * 10 + (CurrentWord.TabWord[i] - '0');
+        tebak = tebak * 10 + (M.currentWord[i] - '0');
     }
     return tebak;
 }
