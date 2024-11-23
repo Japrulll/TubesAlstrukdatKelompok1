@@ -11,7 +11,7 @@ typedef struct {
     int totalChars;          
 } MesinKarakter;
 
-void startMesinKarakter(MesinKarakter *mk);
+void startMesinKarakter(MesinKarakter *mk, FILE *inputFile);
 /* Memulai mesin karakter untuk membaca input hingga akhir baris atau EOF */
 /* I.S. Mesin karakter belum aktif atau sedang tidak membaca input */
 /* F.S. Mesin karakter membaca input dari pengguna, menyimpan karakter ke buffer, menambahkan null terminator ('\0'), dan mempersiapkan untuk pembacaan karakter per karakter */
