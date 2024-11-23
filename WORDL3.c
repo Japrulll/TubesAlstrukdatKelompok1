@@ -4,123 +4,44 @@
 #include "mesinkarakter.h"
 #include "mesinkata.h"
 
-// Daftar kata yang dapat dipilih
-char *kata_kumpulan[] = {
-    "MOUSE", "TABLE", "WATER", "STORE", "CHAIR",
-    "GRAVE", "FLUSH", "CRANE", "DRAFT", "PLUMB",
-    "QUICK", "SHOCK", "WORLD", "FAULT", "PRINT",
-    "GLOVE", "JUMPY", "BIRTH", "SHORT", "CHORD",
-    "CROWN", "BLANK", "FRESH", "MIXER", "SLOPE",
-    "FLINT", "DROWN", "POWER", "GRASP", "SCORN",
-    "TWIST", "SHOVE", "HARPY", "BRAVE", "DEPTH",
-    "CURVE", "FLOCK", "TRUCE", "WHIRL", "KITES",
-    "WOUND", "FLARE", "SHOUT", "CRISP", "CHARM"
-};
-
-// Fungsi untuk memilih kata acak
-char * pilih_kata_acak() {
-    srand(time(NULL)); 
-    int indeks_acak = rand() % 45;
-    char *sumber_kata = kata_kumpulan[indeks_acak];
-    char *kata_terpilih;
-    for (int i=0; i<5; i++){
-        kata_terpilih[i] = sumber_kata[i];
-    }
-    return (kata_terpilih);
-}
-
-Word valid_word(){
-    STARTWORD();
-    while ( !EndWord ) {
-        ADVWORD();
-    }
-
-    return CurrentWord;
-}
-
-void cetak(int KESEMPATAN, char kata_K5[15], char kata_K4[15], char kata_K3[15], char kata_K2[15], char kata_K1[15]){
-    if (KESEMPATAN==5){
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K5[a]);
-        }
-        printf("\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n\n");
-    }
-    else if (KESEMPATAN==4){
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K5[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K4[a]);
-        }
-        printf("\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n\n");
-    }
-    else if (KESEMPATAN==3){
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K5[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K4[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K3[a]);
-        }
-        printf("\n__ __ __ __ __\n__ __ __ __ __\n\n");
-    }
-    else if (KESEMPATAN==2){
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K5[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K4[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K3[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K2[a]);
-        }
-        printf("\n__ __ __ __ __\n\n");
-    }
-    else if (KESEMPATAN==1){
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K5[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K4[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K3[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K2[a]);
-        }
-        printf("\n");
-        for (int a=0; a<15; a++){
-            printf("%c",kata_K1[a]);
-        }
-        printf("\n");
-    }
+MesinKata valid_word(){
+    MesinKarakter m;
+    MesinKata M;
+    startMesinKarakter(&m,stdin);
+    startMesinKata(&m,&M);
+    return M;
 }
 
 int W0RDL3(int uang) {
-    int KESEMPATAN = 5;
+    char kata_kumpulan[160][6] = {
+    "BUKIT", "LAMPU", "KURSI", "PINTU", "GARIS", "ASPEK", "ASYIK", "BESAR",
+    "BENCI", "HUTAN", "KIPAS", "LUKIS", "PESAN", "BEKAS", "BEGAL", "BECAK",
+    "KERJA", "KUNCI", "TENDA", "CERNA", "RIMBA", "PUTIH", "HARUM", "BETAH",
+    "SULIT", "DEBIT", "TULIS", "LIRIK", "CEPAT", "TERIK", "ANGIN", "BASUH",
+    "EMPUK", "LEBAR", "SUAMI", "BERAT", "FIGUR", "KASIH", "MERAH", "BAGUS",
+    "IKLAN", "GITAR", "GADIS", "FINAL", "SEDIH", "SALUT", "BURAM", "LOMBA",
+    "RINDU", "HAKIM", "GABUS", "GEMUK", "SENAM", "GEMPA", "HADIR", "HALUS",
+    "BELAS", "GARPU", "HAMIL", "HASUT", "LUNAS", "HABIS", "MEGAH", "IDOLA",
+    "CERIA", "BASMI", "HOTEL", "BONUS", "HUMOR", "NAFAS", "BANCI", "BIDAN",
+    "IMLEK", "INDUK", "GEMAR", "PANIK", "LUKIS", "MIKRO", "MASIH", "BAKSO",
+    "KUDIS", "PANIK", "INGAT", "INTEL", "RATUS", "SAYUR", "WAKIL", "DOMBA",
+    "PETIR", "JAKUN", "TIRAM", "LATIH", "JILAT", "JUMAT", "PELUK", "CINTA",
+    "JERAT", "JUBAH", "TUGAS", "JEJAK", "JUMPA", "JUMBO", "BAKTI", "TAHUN",
+    "BATIK", "KAGUM", "SELAM", "KAGET", "JAKET", "KAMUS", "KAMIS", "KARTU",
+    "SENJA", "RUANG", "HIJAB", "PILAR", "LARUT", "TIMUR", "SALJU", "KARGO",
+    "TULIP", "KATUP", "KITAB", "JEJAK", "SERAT", "KETUA", "BALOK", "KEMAH",
+    "MULIA", "LAPOR", "JADUL", "LERAI", "DUNIA", "JENIS", "HEWAN", "LEBIH",
+    "LEKAS", "LEBAT", "LEMON", "HALUS", "LIHAT", "LOGIS", "LIDAH", "MANDI",
+    "MERDU", "MODEL", "MOTIF", "NASIB", "OPTIK", "ORANG", "PAMER", "PANCI",
+    "PASTI", "PEGAL", "PANIK", "PERGI", "RACUN", "RESMI", "RIVAL", "SANDI"
+};
+    int KESEMPATAN = 6;
     uang -= 500; // Pemain membayar 500 untuk masuk
-    char *kata_target = pilih_kata_acak();
-    printf("WELCOME TO \"WORDL3\" CHALLENGE!!!\n.\n.\n");
+
+    srand(time(NULL)); 
+    int indeks_acak = rand() % 160;
+
+    printf("\nWELCOME TO \"WORDL3\" CHALLENGE!!!\n.\n.\n");
     printf("~~~~~~~~~~~~~~~~~~~~ DESKRIPSI ~~~~~~~~~~~~~~~~~~~~\n");
     printf("Pada permainan ini, anda akan diminta menebak sebuah kata yang benar.\n");
     printf("Anda akan diberikan 5 kesempatan menebak kata dengan memasukkan input yang valid.\n");
@@ -129,36 +50,29 @@ int W0RDL3(int uang) {
     printf("\nSaldo awal Anda adalah: %d rupiah\n", uang);
     printf("--------------------------------------------\n");
 
-    printf("__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n\n");
+    printf("__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n\n");
 
-    char kata_K5[15];
-    char kata_K4[15];
-    char kata_K3[15];
-    char kata_K2[15];
-    char kata_K1[15];
-    char sementara[15];
+    char kata[5][15];
 
     for (KESEMPATAN; KESEMPATAN > 0; KESEMPATAN--) {
         printf("(Kesempatan tersisa: %d)\n", KESEMPATAN);
         printf("Masukan kata tebakan Anda: ");
 
-        valid_word();
-        
-        //Validasi input
+        MesinKata M = valid_word();
         boolean cek = true;
-        if (CurrentWord.Length!=5){
+        if (M.currentLength!=5){
             KESEMPATAN++;
             cek=false;
         }
         else {
-            for (int l=0; l<CurrentWord.Length; l++){
-                if ((CurrentWord.TabWord[l]<65 || CurrentWord.TabWord[l]>90) && (CurrentWord.TabWord[l]<97 || CurrentWord.TabWord[l]>122)) {
+            for (int l=0; l<M.currentLength; l++){
+                if ((M.currentWord[l]<65 || M.currentWord[l]>90) && (M.currentWord[l]<97 || M.currentWord[l]>122)) {
                     KESEMPATAN++;
                     cek=false;
                     break;
                 }
-                if (CurrentWord.TabWord[l]>=97 && CurrentWord.TabWord[l]<=122){
-                    CurrentWord.TabWord[l] -= 32;
+                if (M.currentWord[l]>=97 && M.currentWord[l]<=122){
+                    M.currentWord[l] -= 32;
                 }
             }
         }
@@ -172,46 +86,37 @@ int W0RDL3(int uang) {
         int sama_semua=0;
         for (int i = 0; i < 5; i++) {
             int ditemukan = 0;
-            sementara[(i*3)] = CurrentWord.TabWord[i];
-            sementara[((i*3)+2)] = ' ';
-            for (int j = 0; j < 5; j++) {
-                if (CurrentWord.TabWord[i] == kata_target[j]) {
+            kata[KESEMPATAN-1][(i*3)] = M.currentWord[i];
+            kata[KESEMPATAN-1][((i*3)+2)] = ' ';
+            for (int j = 0; j < 6; j++) {
+                if (M.currentWord[i] == kata_kumpulan[indeks_acak][j]) {
                     ditemukan = 1;
                     if (i == j) {
                         sama_semua++;
-                        sementara[((i*3)+1)] = ' ';
+                        kata[KESEMPATAN-1][((i*3)+1)] = ' ';
                     } else {
-                        sementara[((i*3)+1)] = '*';
+                        kata[KESEMPATAN-1][((i*3)+1)] = '*';
                     }
                     break;
                 }
             }
             if (ditemukan == 0) {
-                sementara[((i*3)+1)] = '%';
+                kata[KESEMPATAN-1][((i*3)+1)] = '%';
             }
             if (sama_semua==5){
                 break;
             }
         }
-        for (int k=0; k<15; k++){
-            if (KESEMPATAN==5){
-                kata_K5[k] = sementara[k];
+       
+        for (int b=5; b>=(KESEMPATAN-1); b--){
+            for (int a=0; a<15; a++){
+                printf("%c",kata[b][a]);
             }
-            else if (KESEMPATAN==4){
-                kata_K4[k] = sementara[k];
-            }
-            else if (KESEMPATAN==3){
-                kata_K3[k] = sementara[k];
-            }
-            else if (KESEMPATAN==2){
-                kata_K2[k] = sementara[k];
-            }
-            else if (KESEMPATAN==1){
-                kata_K1[k] = sementara[k];
-            }
+            printf("\n");
         }
-
-        cetak(KESEMPATAN, kata_K5, kata_K4, kata_K3, kata_K2, kata_K1);     
+        for (int c=0;c<(KESEMPATAN-1); c++){
+            printf("__ __ __ __ __\n");
+        }
 
         if (sama_semua==5){
             printf("\nSelamat, Anda menang!\n");
@@ -220,13 +125,14 @@ int W0RDL3(int uang) {
             printf("Saldo anda saat ini adalah : %d rupiah\n", uang);
             return uang;
         }
-
         printf("\n");
-
     }
 
-    printf("\nMaaf, Anda kalah. Kata yang benar adalah: %s\n", kata_target);
-    printf("Saldo anda saat ini adalah : %d rupiah\n", uang);
+    printf("Maaf, Anda kalah. Kata yang benar adalah: ");
+    for (int x=0; x<6; x++){
+        printf("%c",kata_kumpulan[indeks_acak][x]);
+    }
+    printf("\nSaldo anda saat ini adalah : %d rupiah\n", uang);
 
     return uang;
 }
@@ -238,3 +144,4 @@ int main() {
     return 0;
 }
 */
+
