@@ -21,7 +21,7 @@ int compareStrings(const char *str1, const char *str2);
 /* F.S.: Mengembalikan nilai integer */
 
 void copyString(char *dest, const char *src);
-/*menyalin string dari source ke destination sebagai pengganti strcpy */
+/* Menyalin string dari source ke destination sebagai pengganti strcpy */
 /* I.S. src merupakan source dan dest merupakan destination dari source */
 /* F.S. src telah disalin ke dest */
 
