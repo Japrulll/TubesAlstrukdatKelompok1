@@ -38,7 +38,7 @@ void registerUser() {
 
     printf(">> REGISTER\n");
     printf("Username: ");
-    startMesinKarakter(&mk);
+    startMesinKarakter(&mk, stdin);
     startMesinKata(&mk, &usernameKata);
 
     for (int i = 0; i < userCount; i++) {
@@ -49,7 +49,7 @@ void registerUser() {
     }
 
     printf("Password: ");
-    startMesinKarakter(&mk);
+    startMesinKarakter(&mk, stdin);
     startMesinKata(&mk, &passwordKata);
 
     copyString(users[userCount].username, usernameKata.currentWord);
@@ -72,11 +72,11 @@ void login() {
 
     printf(">> LOGIN\n");
     printf("Username: ");
-    startMesinKarakter(&mk);
+    startMesinKarakter(&mk, stdin);
     startMesinKata(&mk, &usernameKata);
 
     printf("Password: ");
-    startMesinKarakter(&mk);
+    startMesinKarakter(&mk, stdin);
     startMesinKata(&mk, &passwordKata);
 
     for (int i = 0; i < userCount; i++) {
@@ -112,7 +112,7 @@ void mainMenu() {
         printf("3. Logout\n");
         printf("4. Exit\n");
         printf("Pilihan: ");
-        startMesinKarakter(&mk);
+        startMesinKarakter(&mk, stdin);
         startMesinKata(&mk, &choiceKata);
 
         if (compareStrings(choiceKata.currentWord, "1")) {

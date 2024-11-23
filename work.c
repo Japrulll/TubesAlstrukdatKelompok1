@@ -51,7 +51,7 @@ void work(int *balance) {
     char chosenJob[JOB_NAME_LEN];
     
     printf("\nMasukkan pekerjaan yang dipilih: ");
-    startMesinKarakter(&mk);
+    startMesinKarakter(&mk, stdin);
     startMesinKata(&mk, &mK);
 
     // Salin hasil kata ke `chosenJob`

@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include "mesinkarakter.h"
 
-void startMesinKarakter(MesinKarakter *mk) {
+void startMesinKarakter(MesinKarakter *mk, FILE *inputFile) {
     mk->currentIndex = 0;
     mk->totalChars = 0;
 
-    // Baca hingga karakter newline ('\n') atau EOF
-    while ((mk->buffer[mk->totalChars] = getchar()) != '\n' && mk->buffer[mk->totalChars] != EOF) {
-        mk->totalChars++;
+    // Membaca karakter hingga newline ('\n') atau EOF
+    char c;
+    while (fscanf(inputFile, "%c", &c) == 1 && c != '\n' && c != EOF) {
+        mk->buffer[mk->totalChars++] = c;
     }
-    mk->buffer[mk->totalChars] = '\0'; // Tambahkan null terminator
+    mk->buffer[mk->totalChars] = '\0'; // Null terminator
 }
 
 char getNextChar(MesinKarakter *mk) {
