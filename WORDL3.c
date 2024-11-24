@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "mesinkarakter.h"
-#include "mesinkata.h"
+#include "mesinkarakterjaprul.h"
+#include "mesinkatajaprul.h"
 
-MesinKata valid_word(){
-    MesinKarakter m;
-    MesinKata M;
-    startMesinKarakter(&m,stdin);
-    startMesinKata(&m,&M);
-    return M;
+
+Word valid_word(){
+    STARTWORD();
+    while ( !EndWord ) {
+        ADVWORD();
+    }
+    return CurrentWord;
 }
 
 int W0RDL3(int uang) {
@@ -34,21 +35,30 @@ int W0RDL3(int uang) {
     "LEKAS", "LEBAT", "LEMON", "HALUS", "LIHAT", "LOGIS", "LIDAH", "MANDI",
     "MERDU", "MODEL", "MOTIF", "NASIB", "OPTIK", "ORANG", "PAMER", "PANCI",
     "PASTI", "PEGAL", "PANIK", "PERGI", "RACUN", "RESMI", "RIVAL", "SANDI"
-};
+    };
+
     int KESEMPATAN = 6;
     uang -= 500; // Pemain membayar 500 untuk masuk
 
     srand(time(NULL)); 
     int indeks_acak = rand() % 160;
 
-    printf("\nWELCOME TO \"WORDL3\" CHALLENGE!!!\n.\n.\n");
-    printf("~~~~~~~~~~~~~~~~~~~~ DESKRIPSI ~~~~~~~~~~~~~~~~~~~~\n");
-    printf("Pada permainan ini, anda akan diminta menebak sebuah kata yang benar.\n");
-    printf("Anda akan diberikan 5 kesempatan menebak kata dengan memasukkan input yang valid.\n");
-    printf("Jika berhasil menebak dengan benar, anda akan mendapat tambahan uang sebesar 1500 rupiah.\n");
-    printf("\n~~~~~~~~~~~~~~~~ SELAMAT BERMAIN ~~~~~~~~~~~~~~~~\n");
-    printf("\nSaldo awal Anda adalah: %d rupiah\n", uang);
-    printf("--------------------------------------------\n");
+    printf("*****************************************************\n");
+    printf("*         WELCOME TO \"WORDL3\" CHALLENGE!!!          *\n");
+    printf("*                                                   *\n");
+    printf("*                   DESKRIPSI                       *\n");
+    printf("* Pada permainan ini, anda akan diminta menebak     *\n");
+    printf("* sebuah kata yang benar. Anda akan diberikan 5     *\n");
+    printf("* kesempatan menebak kata dengan memasukkan input   *\n");
+    printf("* yang valid. Jika berhasil menebak dengan benar,   *\n");
+    printf("* anda akan mendapat uang sebesar 1500 rupiah.      *\n");
+    printf("* Pada permainan ini, anda akan diminta menebak     *\n");
+    printf("*                                                   *\n");
+    printf("*                SELAMAT BERMAIN!                   *\n");
+    printf("*                                                   *\n");
+    printf("*****************************************************\n");
+    printf("       Saldo awal Anda adalah: %d rupiah\n", uang);
+    printf("-----------------------------------------------------\n");
 
     printf("__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n__ __ __ __ __\n\n");
 
@@ -58,21 +68,21 @@ int W0RDL3(int uang) {
         printf("(Kesempatan tersisa: %d)\n", KESEMPATAN);
         printf("Masukan kata tebakan Anda: ");
 
-        MesinKata M = valid_word();
+        valid_word();
         boolean cek = true;
-        if (M.currentLength!=5){
+        if (CurrentWord.Length!=5){
             KESEMPATAN++;
             cek=false;
         }
         else {
-            for (int l=0; l<M.currentLength; l++){
-                if ((M.currentWord[l]<65 || M.currentWord[l]>90) && (M.currentWord[l]<97 || M.currentWord[l]>122)) {
+            for (int l=0; l<CurrentWord.Length; l++){
+                if ((CurrentWord.TabWord[l]<65 || CurrentWord.TabWord[l]>90) && (CurrentWord.TabWord[l]<97 || CurrentWord.TabWord[l]>122)) {
                     KESEMPATAN++;
                     cek=false;
                     break;
                 }
-                if (M.currentWord[l]>=97 && M.currentWord[l]<=122){
-                    M.currentWord[l] -= 32;
+                if (CurrentWord.TabWord[l]>=97 && CurrentWord.TabWord[l]<=122){
+                    CurrentWord.TabWord[l] -= 32;
                 }
             }
         }
@@ -86,10 +96,10 @@ int W0RDL3(int uang) {
         int sama_semua=0;
         for (int i = 0; i < 5; i++) {
             int ditemukan = 0;
-            kata[KESEMPATAN-1][(i*3)] = M.currentWord[i];
+            kata[KESEMPATAN-1][(i*3)] = CurrentWord.TabWord[i];
             kata[KESEMPATAN-1][((i*3)+2)] = ' ';
             for (int j = 0; j < 6; j++) {
-                if (M.currentWord[i] == kata_kumpulan[indeks_acak][j]) {
+                if (CurrentWord.TabWord[i] == kata_kumpulan[indeks_acak][j]) {
                     ditemukan = 1;
                     if (i == j) {
                         sama_semua++;
@@ -144,4 +154,3 @@ int main() {
     return 0;
 }
 */
-
