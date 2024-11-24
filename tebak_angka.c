@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "mesinkarakter.h"
-#include "mesinkata.h"
+#include "mesinkarakterjaprul.h"
+#include "mesinkatajaprul.h"
 
 
 // Fungsi untuk random number generator
@@ -15,32 +15,39 @@ int generate_random_number() {
 int CharToInt() {
     int tebak = 0;
 
-    MesinKarakter m;
-    MesinKata M;
-    startMesinKarakter(&m,stdin);
-    startMesinKata(&m,&M);
+    STARTWORD();
+    while ( !EndWord ) {
+        ADVWORD();
+    }
 
-
-    for (int i=0; i<M.currentLength;i++) {
-        if (M.currentWord[i]<'0' || M.currentWord[i]>'9' ){
+    for (int i=0; i<CurrentWord.Length;i++) {
+        if (CurrentWord.TabWord[i]<'0' || CurrentWord.TabWord[i]>'9' ){
             return -1;
         }
-        tebak = tebak * 10 + (M.currentWord[i] - '0');
+        tebak = tebak * 10 + (CurrentWord.TabWord[i] - '0');
     }
     return tebak;
 }
 
 int Tebak_Angka(int uang) {
-    printf("...Memulai permainan Tebak Angka...\n");
+    printf("...Memulai permainan Tebak Angka...\n.\n");
 
-    printf("WELCOME TO \"TEBAK ANGKA\" CHALLENGE!!!\n.\n.\n");
-    printf("~~~~~~~~~~~~~~~~~~~~ DESKRIPSI ~~~~~~~~~~~~~~~~~~~~\n");
-    printf("Pada permainan ini, anda akan diminta menebak angka yang benar dari antara 0 sampai 99\n");
-    printf("Anda akan diberikan 10 kesempatan menebak angka.\n");
-    printf("Jika berhasil menebak dengan benar, anda akan mendapat uang berdasarkan sisa kesempatan yang dimiliki.\n");
-    printf("\n~~~~~~~~~~~~~~~~ SELAMAT BERMAIN ~~~~~~~~~~~~~~~~\n");
-    printf("\nSaldo awal Anda adalah: %d rupiah\n", uang);
-    printf("--------------------------------------------\n");
+    printf("*****************************************************\n");
+    printf("*       WELCOME TO \"TEBAK ANGKA\" CHALLENGE!!!       *\n");
+    printf("*                                                   *\n");
+    printf("*                   DESKRIPSI                       *\n");
+    printf("* Pada permainan ini, anda akan diminta menebak     *\n");
+    printf("* angka yang benar dari antara 0 sampai 99.         *\n");
+    printf("* Anda akan diberikan 10 kesempatan menebak angka.  *\n");
+    printf("* Jika berhasil menebak dengan benar, anda akan     *\n");
+    printf("* mendapat uang, bergantung pada sisa kesempatan    *\n");
+    printf("* yang anda miliki.                                 *\n");
+    printf("*                                                   *\n");
+    printf("*                SELAMAT BERMAIN!                   *\n");
+    printf("*                                                   *\n");
+    printf("*****************************************************\n");
+    printf("      Saldo awal Anda adalah: %d rupiah\n", uang);
+    printf("-----------------------------------------------------\n");
 
     // Kurangi biaya permainan
     uang -= 200;
