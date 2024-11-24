@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "help.h"
 
 void displayHelpWelcome(){
     printf("===== [ Welcome Menu Help PURRMART ]=====\n");
