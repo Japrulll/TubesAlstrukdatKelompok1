@@ -47,6 +47,6 @@ void CopyWord();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 boolean isWordEqual(Word word, char* str);
-boolean isIn(Word Word, BarangDin NamaItem);
+boolean isIn(Word Word, DinamicItemList NamaItem);
 
 #endif

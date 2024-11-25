@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "help.h": "c"
+        "help.h": "c",
+        "adtfile.h": "c",
+        "mesinkarakter.h": "c"
     }
 }
