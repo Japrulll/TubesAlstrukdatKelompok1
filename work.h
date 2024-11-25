@@ -11,7 +11,7 @@
 typedef struct {
     char jobName[JOB_NAME_LEN];
     int pekerjaan;
-    int durasi; // dalam detik
+    int durasi;
 } Job;
 
 // Operasi string
