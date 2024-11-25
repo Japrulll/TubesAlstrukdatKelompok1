@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include "mesinkata.h"
+
 #include "boolean.h"
 #include "mesinkarakter.h"
 #include "ADTItem.h"
+#include "mesinkata.h"
 
 boolean EndWord;
 Word CurrentWord;
@@ -69,20 +70,38 @@ boolean isWordEqual(Word word, char* str) {
     return (i == word.Length && str[i] == '\0');
 }
 
-boolean isIn(Word word, DinamicItemList itemList) {
-    for (int i = 0; i < Length(itemList); i++){
+boolean isIn(Word word, DinamicItemList list_barang) {
+    for (int i = 0; i < Length(list_barang); i++) {
         int j = 0;
         boolean match = true;
-        while (j < word.Length && itemList.items[i].name[j] != '\0') {
-            if (word.TabWord[j] != itemList.items[i].name[j]) {
+        while (j < word.Length && list_barang.items[i].name[j] != '\0') {
+            if (word.TabWord[j] != list_barang.items[i].name[j]) {
                 match = false;
                 break;
             }
             j++;
         }
-        if (match && j == word.Length && itemList.items[i].name[j] == '\0') {
+        if (match && j == word.Length && list_barang.items[i].name[j] == '\0') {
             return true;
         }
     }
     return false;
 }
+
+
+
+
+
+// int main() {
+//     // Memulai pembacaan kata
+//     STARTWORD();
+//     while (!EndWord) {
+//         ADVWORD();
+//     }
+//     printf("%s", CurrentWord.TabWord);
+
+//     // Memberi tahu bahwa proses selesai
+//     //printf("End of input reached.\n");
+
+//     return 0;
+// }

@@ -6,6 +6,7 @@
 
 #include "boolean.h"
 #include "mesinkarakter.h"
+#include "ADTItem.h"
 
 #define NMax 100
 #define BLANK ' '
@@ -47,6 +48,6 @@ void CopyWord();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 boolean isWordEqual(Word word, char* str);
-boolean isIn(Word Word, DinamicItemList NamaItem);
+boolean isIn(Word word, DinamicItemList list_barang);
 
 #endif

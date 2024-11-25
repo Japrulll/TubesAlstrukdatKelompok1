@@ -18,7 +18,6 @@ void START(){
           Jika currentChar = MARK maka EOP akan menyala (true) */
     pita = stdin;
     ADV();
-
 }          
 
 void ADV(){
@@ -28,12 +27,13 @@ void ADV(){
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
    retval = fscanf(pita,"%c",&currentChar);
-   if (retval==EOF){
-        EOP=true;
-    }
-    else {
-        EOP=IsEOP();
-    }
+   if (retval == EOF){
+      EOP = true;
+   }
+   else {
+      EOP = IsEOP();
+   }
+
 }
 
 char GetCC(){
