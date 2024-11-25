@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "mesinkarakter.h"
+#include "mesinkarakterfino.h"
 
 void startMesinKarakter(MesinKarakter *mk, FILE *inputFile) {
     mk->currentIndex = 0;
