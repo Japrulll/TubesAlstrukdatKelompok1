@@ -10,4 +10,6 @@ void displayHelpLogin();
 void displayHelpMain();
 //fungsi untuk menampilkan help pada display main menu
 
+void displayChallange();
+//fungsi untuk mendisplay challange yang tersedia
 #endif 
