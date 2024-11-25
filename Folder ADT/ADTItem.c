@@ -6,7 +6,7 @@
 #define A(dinamic) (dinamic).items
 #define Cap(dinamic) (dinamic).capacity
 #define Count(dinamic) (dinamic).count
-#define InitialSize 2
+
 
 void initDinamicItemList(DinamicItemList *list){
     list->capacity = 2;
@@ -147,4 +147,3 @@ void DeleteAt(DinamicItemList *array, IdxType i) {
     }
     Count(*array) = Count(*array) - 1;
 }
-
