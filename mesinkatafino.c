@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "mesinkata.h"
+#include "mesinkatafino.h"
 
 void startMesinKata(MesinKarakter *mk, MesinKata *mK) {
     mK->currentLength = 0;
