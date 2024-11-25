@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "save.h"
+#include "ADTUser.h"
+#include "ADTItem.h"
+#include "ADTFile.h"
 
 /*fungsi ini untuk testing dengan add item dan add user, dan melihat apakah kesave atau tidak
 void populateList(DinamicItemList *itemList, StaticUserList *userList){
