@@ -46,20 +46,15 @@ void work(int *balance) {
         printf("%s (pendapatan=%d, durasi=%ds)\n", jobs[i].jobName, jobs[i].pekerjaan, jobs[i].durasi);
     }
 
-    MesinKarakter mk;
-    MesinKata mK;
-    char chosenJob[JOB_NAME_LEN];
-    
+    Word chosenJob;
     printf("\nMasukkan pekerjaan yang dipilih: ");
-    startMesinKarakter(&mk, stdin);
-    startMesinKata(&mk, &mK);
-
-    // Salin hasil kata ke `chosenJob`
-    copyString(chosenJob, mK.currentWord);
-
+    
+    STARTWORD();
+    chosenJob = CurrentWord;
+    
     int jobFound = 0;
     for (int i = 0; i < MAX_JOBS; i++) {
-        if (compareStrings(jobs[i].jobName, chosenJob)) {
+        if (isWordEqual(chosenJob, jobs[i].jobName)) {
             jobFound = 1;
             printf("\nAnda sedang bekerja sebagai %s... harap tunggu.\n\n", jobs[i].jobName);
             simulateWork(jobs[i].durasi); 
