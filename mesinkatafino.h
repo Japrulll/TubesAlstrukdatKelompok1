@@ -1,7 +1,7 @@
 #ifndef MESINKATA_H
 #define MESINKATA_H
 
-#include "mesinkarakter.h" 
+#include "mesinkarakterfino.h" 
 
 #define MAX_WORD_LENGTH 100 
 
