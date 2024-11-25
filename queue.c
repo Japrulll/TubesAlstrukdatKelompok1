@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "queuejaprul.h"
+#include "queue.h"
 
 void CreateQueue(Antrian *q) {
     q->A = (Barang *) malloc(CAPACITY * sizeof(Barang));
