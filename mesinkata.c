@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "mesinkatajaprul.h"
+#include "mesinkata.h"
 #include "boolean.h"
-#include "mesinkarakterjaprul.h"
+#include "mesinkarakter.h"
 #include "barangdin.h"
 
 boolean EndWord;
