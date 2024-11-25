@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "mesinkarakterjaprul.h"
-#include "mesinkatajaprul.h"
-
+#include "tebak_angka.h"
 
 // Fungsi untuk random number generator
 int generate_random_number() {
