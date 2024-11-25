@@ -255,14 +255,18 @@ int main(){
             }
         }
         else if(CurrentWord.TabWord[0] == '4'){
-            // logout(users,current,logged);
+            
             printf("would you like to save before quitting (y/n)\n");
+            
             // startMesinKata(&x, &choise);
             STARTWORD();
             if (CurrentWord.TabWord[0] == 'y'){
                 savefilename(filepath,items,users);
             }
             active = 0;
+            // logout(users,current,logged);
+            printf("you have been logged out\n");
+            printf("goodbye");
         }
         
         else if(CurrentWord.TabWord[0] == '5'){
