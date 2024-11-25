@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "mesinkarakterjaprul.h"
-#include "mesinkatajaprul.h"
+#include "WORDL3.h"
 
 
 Word valid_word(){
