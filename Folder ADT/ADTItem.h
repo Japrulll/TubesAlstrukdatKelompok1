@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "boolean.h"
 
+#define InitialSize 10
 #define MAX_LEN 100
 
 typedef struct {
