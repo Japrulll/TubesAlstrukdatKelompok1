@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "load.h"
+#include "ADTUser.h"
+#include "ADTItem.h"
+#include "ADTFile.h"
+
 
 void loadFile(char*filename){
     char filepath[300];

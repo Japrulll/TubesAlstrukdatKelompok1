@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "user_item.h"
+#include "ADTUser.h"
+#include "ADTItem.h"
+#include "ADTFile.h"
 
 void loadFile(char*filename);
 /*membaca file dengan nama file yang diberikan parameter filename. 
