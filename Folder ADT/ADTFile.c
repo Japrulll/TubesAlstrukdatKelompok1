@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "ADTFile.h"
 
 void copyString(char* src, char* dest){
@@ -9,6 +10,17 @@ void copyString(char* src, char* dest){
         i++;
     }
     dest[i] = '\0';
+}
+
+int compareStrings(const char *str1, const char *str2) {
+    int i = 0;
+    while (str1[i] != '\0' && str2[i] != '\0') {
+        if (str1[i] != str2[i]) {
+            return 0; // Tidak sama
+        }
+        i++;
+    }
+    return str1[i] == '\0' && str2[i] == '\0'; 
 }
 
 void display(DinamicItemList *itemlist, StaticUserList *userlist){
@@ -62,4 +74,29 @@ void writeToFile(FILE *file, DinamicItemList *itemList, StaticUserList *userList
         printf("File gagal disave.\n");
     }
 
+}
+
+int generate_random_number() {
+    srand(time(NULL)); 
+    int angka_target =  rand() % 100;
+    return angka_target;
+}
+
+int StrToInt(char* num) {
+    int out = 0;
+    int i = 0;
+    int neg = 0;
+    if (num[i]=='-'){
+        neg = 1;
+        i++;
+    }
+    while (num[i] != '\0'){
+        if (num[i]<'0' || num[i]>'9' ){
+            return -1;
+        }   
+        out = out * 10 + (num[i] - '0'); 
+        i++;
+    }
+    if (neg){out = out*-1;}
+    return out;
 }

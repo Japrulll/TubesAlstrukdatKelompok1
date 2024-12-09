@@ -1,12 +1,10 @@
-#include "mesinkarakter.h"
-#include "mesinkata.h"
+#ifndef TEBAK_ANGKA_H
+#define TEBAK_ANGKA_H
+#include "./Folder ADT/mesinkarakter.h"
+#include "./Folder ADT/mesinkata.h"
+#include "./Folder ADT/ADTFile.h"
 
-int generate_random_number();
-// Fungsi untuk men-generate angka random dari antara 0 sampai 99
 
-int CharToInt();
-// Fungsi untuk mengubah inputan user yang bertipe karakter menjadi integer
-
+// memulai permainan
 int Tebak_Angka(int uang);
-// Fungsi utama untuk tebak angka 
-
+#endif

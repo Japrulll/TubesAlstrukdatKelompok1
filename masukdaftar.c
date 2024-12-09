@@ -1,136 +1,183 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "masukdaftar.h"
-#include "mesinkarakter.h"
-#include "mesinkata.h"
+#include "./Folder ADT/mesinkarakter.h"
+#include "./Folder ADT/mesinkata.h"
+#include "./Folder ADT/ADTFile.h"
+#include "./Folder ADT/ADTUser.h"
 
 // Fungsi untuk membandingkan 2 string
-int compareStrings(const char *str1, const char *str2) {
-    int i = 0;
-    while (str1[i] != '\0' && str2[i] != '\0') {
-        if (str1[i] != str2[i]) {
-            return 0; // Tidak sama
-        }
-        i++;
-    }
-    return str1[i] == '\0' && str2[i] == '\0'; 
-}
 
-// Fungsi untuk menyalin string
-void copyString(char *dest, const char *src) {
-    int i = 0;
-    while (src[i] != '\0') {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0'; // Null terminator
-}
 
-// Data
-User users[MAX_USERS];
-int userCount = 0;
-int loggedInUser = -1;
+// // Fungsi untuk menyalin string
+// void copyString(char* src, char* dest) {
+//     int i = 0;
+//     while (src[i] != '\0') {
+//         dest[i] = src[i];
+//         i++;
+//     }
+//     dest[i] = '\0'; // Null terminator
+// }
 
 // Fungsi Register
-void registerUser() {
-    MesinKarakter mk;
-    MesinKata usernameKata, passwordKata;
+// void registerUser() {
+//     char name[MAX_LEN];
+//     char password[MAX_LEN];
+//     StaticUserList userList;
+//     StaticUserList users;
 
+//     printf(">> REGISTER\n");
+
+//     // Input username
+//     printf("Username: ");
+//     STARTWORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
+//     if (EndWord) {
+//         printf("Username tidak boleh kosong. Silakan coba lagi.\n");
+//     }
+//     // Salin CurrentWord.TabWord ke variabel 'name'
+//     copyString(CurrentWord.TabWord, name);
+
+//     // Cek apakah username sudah ada
+//     for (int i = 0; i < userList.count; i++) {
+//         if (isWordEqual(CurrentWord, userList.users[i].name)) {
+//             printf("Akun dengan username %s gagal dibuat. Silakan lakukan REGISTER ulang.\n", name);
+//             return;
+        
+//         }
+//     }
+
+
+//     // Input password
+//     printf("Password: ");
+//     STARTWORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
+//     if (EndWord) { // Validasi input kosong
+//         printf("Password tidak boleh kosong. Silakan coba lagi.\n");
+//         return;
+//     }
+//     // Salin CurrentWord.TabWord ke variabel 'password'
+//     copyString(CurrentWord.TabWord, password);
+
+//     // Simpan data user baru
+//     copyString(userList.users[userList.count].name, name);       // Simpan username
+//     copyString(userList.users[userList.count].password, password); // Simpan password
+//     userList.users[userList.count].money = 0;                    // Set saldo awal menjadi 0
+
+//     userList.count++; // Tambah jumlah user
+
+//     // Output keberhasilan
+//     printf("Akun dengan username %s telah berhasil dibuat. Silakan LOGIN untuk melanjutkan.\n", name);
+// }
+
+void registerUser(StaticUserList *userList) {  // Tambahkan parameter userList
+    char name[MAX_LEN];
+    char password[MAX_LEN];
+    
     printf(">> REGISTER\n");
+    
+    // Input username
     printf("Username: ");
-    startMesinKarakter(&mk, stdin);
-    startMesinKata(&mk, &usernameKata);
-
-    for (int i = 0; i < userCount; i++) {
-        if (compareStrings(users[i].username, usernameKata.currentWord)) {
-            printf("Akun dengan username %s gagal dibuat. Silakan lakukan REGISTER ulang.\n", usernameKata.currentWord);
+    STARTWORD();
+    
+    if (EndWord) {
+        printf("Username tidak boleh kosong. Silakan coba lagi.\n");
+        return;
+    }
+    
+    // Salin CurrentWord.TabWord ke variabel 'name'
+    copyString(CurrentWord.TabWord, name);
+    
+    // Tambahkan pengecekan userList
+    // if (userList == NULL) {
+    //     printf("UserList tidak valid\n");
+    //     return;
+    // }
+    
+    // // Cek apakah userList sudah penuh
+    // if (userList->count >= MAX_USERS) {  // Asumsikan MAX_USERS sudah didefinisikan
+    //     printf("Error: Tidak bisa menambah user baru, storage penuh\n");
+    // //     return;
+    // }
+    
+    // Cek apakah username sudah ada
+    for (int i = 0; i < userList->count; i++) {
+        if (compareStrings(name, userList->users[i].name)) {
+            printf("Akun dengan username %s gagal dibuat. Silakan lakukan REGISTER ulang.\n", name);
             return;
         }
     }
-
+    
+    // Input password
     printf("Password: ");
-    startMesinKarakter(&mk, stdin);
-    startMesinKata(&mk, &passwordKata);
-
-    copyString(users[userCount].username, usernameKata.currentWord);
-    copyString(users[userCount].password, passwordKata.currentWord);
-    users[userCount].userID = userCount + 1;
-    userCount++;
-
-    printf("Akun dengan username %s telah berhasil dibuat. Silakan LOGIN untuk melanjutkan.\n", usernameKata.currentWord);
+    STARTWORD();
+    
+    if (EndWord) {
+        printf("Password tidak boleh kosong. Silakan coba lagi.\n");
+        return;
+    }
+    
+    // Salin CurrentWord.TabWord ke variabel 'password'
+    copyString(CurrentWord.TabWord, password);
+    
+    // Simpan data user baru
+    addUser(userList,0,name,password);
+    
+    // Output keberhasilan
+    printf("Akun dengan username %s telah berhasil dibuat. Silakan LOGIN untuk melanjutkan.\n", name);
 }
 
 // Fungsi Login
-void login() {
-    MesinKarakter mk;
-    MesinKata usernameKata, passwordKata;
+boolean login(StaticUserList userList,User *change,int *user_index) {
+    char username[100] = "";
+    char pass[100] = "";
 
-    if (loggedInUser != -1) {
-        printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", users[loggedInUser].username);
-        return;
+    if (!compareStrings((*change).name,"null")) {
+        printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", (*change).name);
+        return false;
     }
 
     printf(">> LOGIN\n");
+    // Input username
     printf("Username: ");
-    startMesinKarakter(&mk, stdin);
-    startMesinKata(&mk, &usernameKata);
+    STARTWORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
+    if (EndWord) { // Validasi input kosong
+        printf("Username tidak boleh kosong. Silakan coba lagi.\n");
+        return false;
+    }
+    copyString(CurrentWord.TabWord, username); // Salin ke variabel username
+    // printf("%s\n",CurrentWord.TabWord);
+    // printf("%s\n",username);
 
+    // Memasukkan password
     printf("Password: ");
-    startMesinKarakter(&mk, stdin);
-    startMesinKata(&mk, &passwordKata);
+    STARTWORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
+    if (EndWord) { // Validasi input kosong
+        printf("Password tidak boleh kosong. Silakan coba lagi.\n");
+        return false;
+    }
+    copyString(CurrentWord.TabWord, pass); // Salin ke variabel password
+    // printf("%s\n",CurrentWord.TabWord);
+    // printf("%s\n",pass);
 
-    for (int i = 0; i < userCount; i++) {
-        if (compareStrings(users[i].username, usernameKata.currentWord) &&
-            compareStrings(users[i].password, passwordKata.currentWord)) {
-            loggedInUser = i;
-            printf("Anda telah login ke PURRMART sebagai %s.\n", users[i].username);
-            return;
+    for (int i = 0; i < userList.count+1; i++) {
+        boolean usernameMatch = compareStrings(username, userList.users[i].name);  
+        boolean passwordMatch = compareStrings(pass, userList.users[i].password);  
+
+        if (usernameMatch && passwordMatch) {
+            printf("Anda telah login ke PURRMART sebagai %s.\n", userList.users[i].name);
+            *change = userList.users[i];
+            *user_index = i;
+            return true;
         }
     }
     printf("Username atau password salah.\n");
+
+    return false;
 }
 
-// Fungsi Logout
-void logout() {
-    if (loggedInUser == -1) {
-        printf("Tidak ada pengguna yang sedang login.\n");
-        return;
-    }
-    printf("%s telah logout dari sistem PURRMART. Silakan REGISTER/LOGIN kembali untuk melanjutkan.\n", users[loggedInUser].username);
-    loggedInUser = -1;
-}
-
-// Menu Utama
-void mainMenu() {
-    MesinKarakter mk;
-    MesinKata choiceKata;
-
-    do {
-        printf("\n=== MENU UTAMA ===\n");
-        printf("1. Register\n");
-        printf("2. Login\n");
-        printf("3. Logout\n");
-        printf("4. Exit\n");
-        printf("Pilihan: ");
-        startMesinKarakter(&mk, stdin);
-        startMesinKata(&mk, &choiceKata);
-
-        if (compareStrings(choiceKata.currentWord, "1")) {
-            registerUser();
-        } else if (compareStrings(choiceKata.currentWord, "2")) {
-            login();
-        } else if (compareStrings(choiceKata.currentWord, "3")) {
-            logout();
-        } else if (compareStrings(choiceKata.currentWord, "4")) {
-            printf("Terima kasih telah menggunakan aplikasi.\n");
-            break;
-        } else {
-            printf("Pilihan tidak valid.\n");
-        }
-    } while (1);
-}
-
-int main() {
-    mainMenu();
-    return 0;
+boolean logout(User *current,int *user_index){
+    copyString("null",current->name);
+    copyString("null",current->password);
+    current->money = -1;
+    *user_index = -1;
+    return false;
 }

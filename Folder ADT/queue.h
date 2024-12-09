@@ -1,5 +1,5 @@
-#ifndef QUEUEJAPRUL_H
-#define QUEUEJAPRUL_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include "ADTItem.h"
 #include "boolean.h"
@@ -17,10 +17,15 @@ typedef struct {
 } Antrian;
 
 void CreateQueue(Antrian *q);
+
 boolean IsEmptyQ(Antrian q);
+
 boolean IsFull(Antrian q);
+
 int LengthQ(Antrian q);
+
 void enqueue(Antrian *q, Barang val);
+
 void dequeue(Antrian *q, Barang *val);
 
 #endif

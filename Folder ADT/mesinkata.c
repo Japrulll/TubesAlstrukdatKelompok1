@@ -1,9 +1,9 @@
 #include <stdio.h>
-
+#include "mesinkata.h"
 #include "boolean.h"
 #include "mesinkarakter.h"
-#include "ADTItem.h"
-#include "mesinkata.h"
+// #include "barangdin.h"
+#include "ADTFile.h"
 
 boolean EndWord;
 Word CurrentWord;
@@ -17,6 +17,16 @@ void IgnoreBlanks(){
 }
 
 void STARTWORD(){
+    
+    for (int i = 0;i<100;i++){
+        if (CurrentWord.TabWord[i]=='\0'){
+            break;
+        }
+        else{
+            CurrentWord.TabWord[i] = '\0';
+        }
+    }
+    CurrentWord.Length = 0;
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -70,23 +80,23 @@ boolean isWordEqual(Word word, char* str) {
     return (i == word.Length && str[i] == '\0');
 }
 
-boolean isIn(Word word, DinamicItemList list_barang) {
-    for (int i = 0; i < Length(list_barang); i++) {
-        int j = 0;
-        boolean match = true;
-        while (j < word.Length && list_barang.items[i].name[j] != '\0') {
-            if (word.TabWord[j] != list_barang.items[i].name[j]) {
-                match = false;
-                break;
-            }
-            j++;
-        }
-        if (match && j == word.Length && list_barang.items[i].name[j] == '\0') {
-            return true;
-        }
-    }
-    return false;
-}
+// boolean isIn(Word word, BarangDin list_barang) {
+//     for (int i = 0; i < Length(list_barang); i++) {
+//         int j = 0;
+//         boolean match = true;
+//         while (j < word.Length && list_barang.A[i].name[j] != '\0') {
+//             if (word.TabWord[j] != list_barang.A[i].name[j]) {
+//                 match = false;
+//                 break;
+//             }
+//             j++;
+//         }
+//         if (match && j == word.Length && list_barang.A[i].name[j] == '\0') {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
 
 
 
@@ -95,7 +105,16 @@ boolean isIn(Word word, DinamicItemList list_barang) {
 // int main() {
 //     // Memulai pembacaan kata
 //     STARTWORD();
+
+//     // Selama tidak mencapai akhir input
 //     while (!EndWord) {
+//         // Mencetak kata yang saat ini ada di CurrentWord
+//         // for (int i = 0; i < CurrentWord.Length; i++) {
+//         //     printf("%c", CurrentWord.TabWord[i]);
+//         // }
+//         //printf("\n"); // Pindah baris untuk setiap kata
+
+//         // Memproses kata berikutnya
 //         ADVWORD();
 //     }
 //     printf("%s", CurrentWord.TabWord);

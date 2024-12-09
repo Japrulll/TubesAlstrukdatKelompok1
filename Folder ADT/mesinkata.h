@@ -6,7 +6,6 @@
 
 #include "boolean.h"
 #include "mesinkarakter.h"
-#include "ADTItem.h"
 
 #define NMax 100
 #define BLANK ' '
@@ -45,9 +44,9 @@ void CopyWord();
    F.S. : currentWord berisi kata yang sudah diakuisisi;
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+          Jika panjang kata melebihi NMax,s maka sisa kata "dipotong" */
 
-boolean isWordEqual(Word word, char* str);
-boolean isIn(Word word, DinamicItemList list_barang);
+// boolean isWordEqual(Word word, char* str);
+// boolean isIn(Word Word, BarangDin NamaItem);
 
 #endif

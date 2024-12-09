@@ -1,29 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "./Folder ADT/mesinkarakter.h"
+#include "./Folder ADT/mesinkata.h"
+#include "./Folder ADT/ADTFile.h"
 #include "tebak_angka.h"
 
-// Fungsi untuk random number generator
-int generate_random_number() {
-    srand(time(NULL)); 
-    int angka_target =  rand() % 100;
-    return angka_target;
-}
 
-int CharToInt() {
+int InputToInt_tebak_angka() {
     int tebak = 0;
 
     STARTWORD();
     while ( !EndWord ) {
         ADVWORD();
     }
-
-    for (int i=0; i<CurrentWord.Length;i++) {
-        if (CurrentWord.TabWord[i]<'0' || CurrentWord.TabWord[i]>'9' ){
-            return -1;
-        }
-        tebak = tebak * 10 + (CurrentWord.TabWord[i] - '0');
-    }
+    tebak = StrToInt(CurrentWord.TabWord);
     return tebak;
 }
 
@@ -65,7 +56,7 @@ int Tebak_Angka(int uang) {
         }
         
         printf("Masukkan angka tebakan Anda -> ");
-        tebakan = CharToInt();
+        tebakan = InputToInt_tebak_angka();
 
         // Validasi input
         if (tebakan < 0 || tebakan > 99) {

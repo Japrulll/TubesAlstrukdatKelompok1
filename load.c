@@ -1,23 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "load.h"
-#include "ADTUser.h"
-#include "ADTItem.h"
-#include "ADTFile.h"
+#include "./Folder ADT/ADTUser.h"
+#include "./Folder ADT/ADTItem.h"
+#include "./Folder ADT/ADTFile.h"
 
 
-void loadFile(char*filename){
+void loadFile(char*filename,DinamicItemList *itemList,StaticUserList *userList){
     char filepath[300];
     constructfilepath(filepath, "./save/", filename);
-    DinamicItemList itemList;
-    StaticUserList userList;
-    initDinamicItemList(&itemList);
-    initStaticUserList(&userList);
+
+    initDinamicItemList(itemList);
+    initStaticUserList(userList);
     FILE *file = fopen(filepath, "r");
     if (file != NULL){
         
         //bagian ini adalah hanya testing untuk melihat apakah semua isi dalam file sudah terbaca atau tidak
-        /*int itemCount;
+        int itemCount;
         int userCount;
         fscanf(file, "%d", &itemCount);
         for(int i = 0; i < itemCount; i++){
@@ -26,7 +25,7 @@ void loadFile(char*filename){
             fscanf(file, "%d", &price);
             fgetc(file);
             readline(file, name);
-            addItem(&itemList, price, name);
+            addItem(itemList, price, name);
         }
         fscanf(file, "%d", &userCount);
         for (int i = 0; i < userCount; i++){
@@ -34,12 +33,13 @@ void loadFile(char*filename){
             char user[MAX_LEN];
             char pass[MAX_LEN];
             fscanf(file, "%d %s %s", &money, user, pass);
-            addUser(&userList, money, user, pass);
+            addUser(userList, money, user, pass);
         }
-        */
         
-        display(&itemList, &userList);
+        
+        // display(itemList, userList);
         printf("Save file berhasil dibaca. PURRMART berhasil dijalankan.\n");
+        // freeDinamicItemList(itemList);
         fclose(file);
     }
     else{

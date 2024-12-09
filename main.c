@@ -1,37 +1,59 @@
 // imports
+
+/*compile paste board
+gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" -o main.exe
+*/
+
+// built in module
+#include <stdio.h>
+
+// custom modules
+//#############
+// # display
 #include "help.h"
+
+// # file menu and login
 #include "save.h"
 #include "load.h"
-
-
-// #include "work.h"
-// #include "tebak_angka.h"
-#include "./Folder ADT/mesinkata.h"
-#include "./Folder ADT/mesinkarakter.h"
 #include "masukdaftar.h"
-// #include "WORDL3.h"
-// #include "StoreList.h"
-// #include "barangdin.h"
 
+// # work and games
+#include "work.h"
+#include "tebak_angka.h"
+#include "WORDL3.h"
+
+// # store management
+#include "StoreList.h"
+
+// ADT formats and tools
 #include "./Folder ADT/ADTFile.h"
 #include "./Folder ADT/ADTItem.h"
 #include "./Folder ADT/ADTUser.h"
-#include "load.h"
-#include "boolean.h"
-#include <stdio.h>
+#include "./Folder ADT/mesinkata.h"
+#include "./Folder ADT/mesinkarakter.h"
+#include "./Folder ADT/boolean.h"
+#include "./Folder ADT/queue.h"
 
-// typedef struct{
-//     int userid;
-//     char *name;
-//     char *pass;
-//     int money;
-// } muser;
 
-// extern DinamicItemList ITEM;
-// extern StaticUserList USER;
+// global states
+boolean active;
+boolean back;
+boolean loaded;
+boolean logged;
+
+// global file and user variable
+DinamicItemList items;
+StaticUserList users;
+Antrian gudang;
+
+// global users stuff
+User current;
+int current_index;
+char savename[100];
+
 
 void start(DinamicItemList *item,StaticUserList *user){
-    // default start file
+    // ======= default start file ==========
     //  3
     //  10 AK47
     //  20 Lalabu
@@ -39,251 +61,234 @@ void start(DinamicItemList *item,StaticUserList *user){
     //  2
     //  100 admin alstrukdatkeren
     //  25 praktikan kerenbangetkak
-    char filepath[] = "./save/";
-    char filename[MAX_LEN] = "default_save.txt";
 
-    DinamicItemList default_items;
-    initDinamicItemList(&default_items);
     
-    addItem(&default_items, 10, "AK47");
-    addItem(&default_items, 20, "Lalabu");
-    addItem(&default_items, 20, "Ayam Goreng Crisbar");
+    addItem(item, 10, "AK47");
+    addItem(item, 20, "Lalabu");
+    addItem(item, 20, "Ayam Goreng Crisbar");
 
 
-    StaticUserList def_user;
-    initStaticUserList(&def_user);
-    addUser(&def_user, -1, "null", "-1-1-1-1-1");
-    addUser(&def_user, 100, "admin", "alstrukdatkeren");
-    addUser(&def_user, 25, "praktikan", "kerenbangetkak");
-
-    constructfilepath(filepath, "./save/", filename);
-    *item = default_items;
-    *user = def_user;
-    savefilename(filename,default_items,def_user);
-    // copyString("./save/default_save.txt",filepath);
-    // logged = false;
-    // loaded = true;
-    // initDinamicItemList(&CURRENT_ITEMS);
-    // initStaticUserList(&CURRENT_USERS);
-    // loadFile(filename);
-    // *item = CURRENT_ITEMS;
-    // *user = CURRENT_USERS;
-}
-
-void quit(){
+    addUser(user, 100, "admin", "alstrukdatkeren");
+    addUser(user, 25, "praktikan", "kerenbangetkak");
     
-
+    savefilename("default_save.txt",*item,*user);
+    // loadFile("default_save.txt",item,user);  
 }
 
 
-// log in
+void quit(){ // this is unnesscesary
+    active = false;
+    if (loaded == true){
+        printf("would you like to save before quitting (y/n)\n");
+        STARTWORD();
+        if (CurrentWord.TabWord[0] == 'y'){
+            users.users[current_index].money = current.money;
+            savefilename(savename,items,users);
+        }
+        if (logged == true){
+            logged = logout(&current,&current_index);
+            printf("you have been logged out\n");
+        }
+    }
+    printf("\ngoodbye\n");
+    // active = false;   
+
+}
+
+void inputdelay(){
+    printf("\nInput anything to continue:\n");
+    STARTWORD();
+}
+// void ccc(){
+//     char filepaths[10] = "./save/";
+//     char filenames[MAX_LEN] = "default_save.txt";
+//     constructfilepath(filepaths, "./save/", filenames);
+// }
+
+
+
 int main(){
 
-    // int idk something for user
-    int active = 1;
-    int back = 0;
-    User current;
+    // program states
+    active = true;
+    back = false;
+    loaded = false;
+    logged = false;
+
+    // file and user variable
+    initDinamicItemList(&items);
+    initStaticUserList (&users);
+    CreateQueue(&gudang);
+
+    // users stuff
+    current_index=-1;
     copyString("null",current.name);
     copyString("null",current.password);
     current.money = -1;
-    char filepath[100] = "./save/";
-    char savename[100] = "null";
+    copyString("null",savename);
 
-    DinamicItemList items;
-    initDinamicItemList(&items);
-    StaticUserList users;
-    initStaticUserList (&users);
-
-    // Antrian antre;
-    // CreateQueue(&antre);
-
-    // i need to set up states
-    boolean loaded = false;
-    boolean logged = false;
-    // main loop
+    // ############################ main loop ###################################
     while(active){
-        back = 0;
+        back = false;
         
         // show options
-        printf("===== [ Welcome Menu ]=====\n");
-        printf("\n1.save file");
-        printf("\n2.login options");
-        printf("\n3.main menu");
-        printf("\n4.exit app");
-        printf("\n5.check user\n");
-
-        // MesinKarakter x;
-        // MesinKata choise;
-        // startMesinKarakter(&x,stdin);
-        // startMesinKata(&x, &choise);
+        printf("====== [ Welcome Menu ]======\n");
+        printf("\n1.File Menu");
+        printf("\n2.Login and Register");
+        printf("\n3.Main Menu");
+        printf("\n4.exit");
+        printf("\n5.Check Status\n");
         STARTWORD();
 
-        // printf("%s\n",choise.currentWord);
-
+        // ########################### file menu ##############################
         if (CurrentWord.TabWord[0] == '1'){
             while (!back){
-                back = 0;
+                back = false;
                 displayHelpWelcome();
-                // startMesinKarakter(&x,stdin);
-                // startMesinKata(&x, &choise);
                 STARTWORD();
-                if (CurrentWord.Length == 0){
-                    printf("input is empty\n");
-                    continue;
-                }
-
-
-                else if(CurrentWord.TabWord[0] == '1'){
-                    char filepath[] = "./save/";
-                    char filename[MAX_LEN] = "default_save.txt";
-
-                    // DinamicItemList default_items;
-                    initDinamicItemList(&items);
-                    
-                    addItem(&items, 10, "AK47");
-                    addItem(&items, 20, "Lalabu");
-                    addItem(&items, 20, "Ayam Goreng Crisbar");
-
-
-                    // StaticUserList def_user;
-                    initStaticUserList(&users);
-                    addUser(&users, 100, "admin", "alstrukdatkeren");
-                    addUser(&users, 25, "praktikan", "kerenbangetkak");
-
-                    constructfilepath(filepath, "./save/", filename);
-                    savefilename(filename,items,users);
-                    copyString("default_save.txt",savename);
-            
-                    logged = false;
+                if(CurrentWord.TabWord[0] == '1'){
+                    printf("loading default save file\n");
+                    start(&items,&users);
                     loaded = true;
-
+                    logged = false;
+                    copyString("default_save.txt",savename);
+                    inputdelay();
                 }
                 else if(CurrentWord.TabWord[0] == '2'){
-                    printf("\n\nTuliskan .txt save file mu\n");
-                    // startMesinKata(&x, &choise);
-                    STARTWORD();
-                    copyString(CurrentWord.TabWord,savename);
-                    loadFile(savename);
-                    if (users.count == 0){
-                        loaded = false;
+                        printf("\nTuliskan .txt save file mu\n");
+                        STARTWORD();
+                        
+                        loadFile(CurrentWord.TabWord,&items,&users);
+                        if (users.count == 0 && items.count == 0){
+                            loaded = false;
+                            copyString("null",savename);
+                        }
+                        else{
+                            copyString(CurrentWord.TabWord,savename);
+                            loaded = true;
+                            logged = false;
+                        }
+                        inputdelay();
                     }
-                    else{
-                        loaded = true;
-                        logged = false;
-                    }
-                    
-                    // loadFile(filepath);
-                    // items = ret_items(filepath);
-                    // users = ret_users(filepath);
-                    }
-                else if(CurrentWord.TabWord[0] == '3'){back=1;}
+                else if(CurrentWord.TabWord[0] == '3'){back=true;}
+                
+                else {back = false;}
             }
-
-
         }
+        
+        // ################################ login menu ###############################
         else if(CurrentWord.TabWord[0] == '2' && loaded == true){
             while(!back){
                 displayHelpLogin();
-                // startMesinKata(&x, &choise);
                 STARTWORD();
                 if(CurrentWord.TabWord[0] == '1'){
                     registerUser(&users);
+                    inputdelay();
                 }
                 else if(CurrentWord.TabWord[0] == '2'){
-                    logged = login(users,logged,&current);
+                    logged = login(users,&current,&current_index);
+                    inputdelay();
                 }
-                else if(CurrentWord.TabWord[0] == '3'){
-                    back=1;
-                }
+                else if(CurrentWord.TabWord[0] == '3'){back=true;}
+
+                else {back = false;}
             }
 
         }
+
+        // ##################################### main menu #############################
         else if(CurrentWord.TabWord[0] == '3' && loaded == true && logged == true){
             while(!back){
-                back = 0;
                 displayHelpMain();
                 STARTWORD();
                 if(CurrentWord.TabWord[0] == '1'){
-                    // work(&current.money);
+                    work(&current.money);
+                    users.users[current_index].money = current.money;
+                    inputdelay();
                 }
                 else if(CurrentWord.TabWord[0] == '2'){
                     while(!back){
-                        back = 0;
+                        // ############## Challange menu ##################
                         displayChallange();
-                        // startMesinKata(&x, &choise);
                         STARTWORD();
                         if (CurrentWord.TabWord[0] == '1'){
-                            // current.money = Tebak_Angka(current.money);
+                            current.money = Tebak_Angka(current.money);
+                            users.users[current_index].money = current.money;
                         }
                         else if(CurrentWord.TabWord[0] == '2'){
-                            // current.money = W0RDL3(current.money);
+                            current.money = W0RDL3(current.money);
+                            users.users[current_index].money = current.money;
                         }
-                        else if(CurrentWord.TabWord[0] == '3'){back=1;}
+                        else if(CurrentWord.TabWord[0] == '3'){back=true;}
+
+                        else {back = false;}
                     }
+                    back = false;
                 }
                 else if(CurrentWord.TabWord[0] == '3'){
-                    // display(items);
+                    store_display(items);
+                    inputdelay();
                 }
                 else if(CurrentWord.TabWord[0] == '4'){
-                    // startMesinKata(&x, &choise);
-                    // store_request(antre,items,choise);
+                    store_request(&gudang,items);
                 }
                 else if(CurrentWord.TabWord[0] == '5'){
-                    // store_supply(&antre,items);
+                    store_supply(&gudang,&items);
                 }
                 else if(CurrentWord.TabWord[0] == '6'){
-                    // store_remove(items);
+                    printf("Tuliskan nama item yang ingin diremove :");
+                    store_remove(&items);
                 }
                 else if(CurrentWord.TabWord[0] == '7'){
-                    // logout(users,current,logged);
+                    logged = logout(&current,&current_index);
+                    back = true;
                 }
                 else if(CurrentWord.TabWord[0] == '8'){
+                    users.users[current_index].money = current.money;
                     printf("\nsave file di file baru (y/n)\n");
                     STARTWORD();
                     if (CurrentWord.TabWord[0] == 'y'){
-                        printf("input nama file baru : \n");
+                        printf("input nama file baru : ");
                         STARTWORD();
-                        savefilename(CurrentWord.TabWord,items,users);
+                        copyString(CurrentWord.TabWord,savename);
                     }
-                    
-                    // savefilename(filepath,items,users);
+                    savefilename(savename,items,users);
+                    inputdelay();
                 }
-                back = 0;
-                if(CurrentWord.TabWord[0] == '9'){
-                    back=1;
-                }
+                
+                else if(CurrentWord.TabWord[0] == '9'){back=true;}
+                
+                else{back = false;}
             }
         }
+
+        // ##################################### exit menu ##########################################
         else if(CurrentWord.TabWord[0] == '4'){
-            
-            printf("would you like to save before quitting (y/n)\n");
-            
-            // startMesinKata(&x, &choise);
-            STARTWORD();
-            if (CurrentWord.TabWord[0] == 'y'){
-                savefilename(filepath,items,users);
-            }
-            active = 0;
-            // logout(users,current,logged);
-            printf("you have been logged out\n");
-            printf("goodbye");
+            quit();
         }
         
+        //################################ Status menu #############################
         else if(CurrentWord.TabWord[0] == '5'){
             printf("\n======[status]======\n");
             printf("current file : %s\n",savename);
+            printf("item amount : %d\n",items.count);
+            printf("user amount : %d\n",users.count);
             printf("current account : %s\n",current.name);
             printf("current password : %s\n",current.password);
             printf("money amount : %d\n",current.money);
+
+            inputdelay();
+
         }
+
+        // loop around
         else if (loaded == false){
             printf("\nfile belum diload\n");
         }
 
+        // loop around
         else if (logged == false){
-            printf("\nuser belum login\n");
-            // logged = true;
-            // copyString("blank",current.name);    
+            printf("\nuser belum login\n");  
         }
 
     }

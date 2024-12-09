@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "save.h"
-#include "ADTUser.h"
-#include "ADTItem.h"
-#include "ADTFile.h"
+#include "./Folder ADT/ADTUser.h"
+#include "./Folder ADT/ADTItem.h"
+#include "./Folder ADT/ADTFile.h"
 
 /*fungsi ini untuk testing dengan add item dan add user, dan melihat apakah kesave atau tidak
 void populateList(DinamicItemList *itemList, StaticUserList *userList){
@@ -13,13 +13,13 @@ void populateList(DinamicItemList *itemList, StaticUserList *userList){
 }
 */
 
-void savefilename(char* filename){
+void savefilename(char* filename,DinamicItemList itemList,StaticUserList userList){
     char filepath[300];
     constructfilepath(filepath, "./save/", filename);
-    DinamicItemList itemList;
-    StaticUserList userList;
-    initDinamicItemList(&itemList);
-    initStaticUserList(&userList);
+    // DinamicItemList itemList;
+    // StaticUserList userList;
+    // initDinamicItemList(&itemList);
+    // initStaticUserList(&userList);
     //populateList(&itemList, &userList);
     FILE *file = fopen(filepath, "w");
     writeToFile(file, &itemList, &userList);

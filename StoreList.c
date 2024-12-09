@@ -1,41 +1,39 @@
 #include <stdio.h>
-#include "barangdin.h"
-#include "mesinkata.h"
-#include "queuejaprul.h"
+// #include "Barang.h"
+#include "./Folder ADT/mesinkata.h"
+#include "./Folder ADT/queue.h"
+#include "./Folder ADT/ADTFile.h"
+#include "./Folder ADT/ADTItem.h"
+#include "StoreList.h"
 
-int CharToInt() {
+
+int InputToInt_store() {
     int tebak = 0;
- 
+
     STARTWORD();
     while ( !EndWord ) {
         ADVWORD();
     }
- 
-    for (int i=0; i<CurrentWord.Length;i++) {
-        if (CurrentWord.TabWord[i]<'0' || CurrentWord.TabWord[i]>'9' ){
-            return -1;
-        }
-        tebak = tebak * 10 + (CurrentWord.TabWord[i] - '0');
-    }
+    tebak = StrToInt(CurrentWord.TabWord);
     return tebak;
 }
 
-void display(BarangDin list_barang){
+void store_display(DinamicItemList list_barang){
     if (!IsEmpty(list_barang)){
         for (int i = 0; i < Length(list_barang); i++){
-            printf("%d. %s %d\n", i+1, list_barang.A[i].name, list_barang.A[i].price);
+            printf("%d. %s %d\n", i+1, list_barang.items[i].name, list_barang.items[i].price);
         }
     }
 } 
 
-void store_request(Antrian *antrian_barang, BarangDin list_barang) {
+void store_request(Antrian *antrian_barang, DinamicItemList list_barang) {
     printf("Nama barang yang diminta: ");
     STARTWORD();
     while (!EndWord) {
         ADVWORD();
     }
 
-    if (isIn(CurrentWord, list_barang)) {
+    if (isIn(CurrentWord.TabWord, list_barang)) {
         printf("Barang %.*s sudah ada di store!\n", CurrentWord.Length, CurrentWord.TabWord);
     } else {
         Barang new_item;
@@ -49,7 +47,7 @@ void store_request(Antrian *antrian_barang, BarangDin list_barang) {
     }
 }
 
-void store_supply(Antrian *antrian_barang, BarangDin *list_barang) {
+void store_supply(Antrian *antrian_barang, DinamicItemList *list_barang) {
     while (!IsEmptyQ(*antrian_barang)) {
         Barang val;
         dequeue(antrian_barang, &val);
@@ -60,14 +58,14 @@ void store_supply(Antrian *antrian_barang, BarangDin *list_barang) {
             ADVWORD();
         }
 
-        if (isWordEqual(CurrentWord, "Tunda")) {
+        if (compareStrings(CurrentWord.TabWord, "Tunda")) {
             enqueue(antrian_barang, val);
             printf("%s dikembalikan ke antrian.\n", val.name);
-        } else if (isWordEqual(CurrentWord, "Terima")) {
+        } else if (compareStrings(CurrentWord.TabWord, "Terima")) {
             printf("Harga Barang: ");
-            val.price = CharToInt();
-            InsertAt(list_barang, val, list_barang->Count);
-        } else if (isWordEqual(CurrentWord, "Tolak")) {
+            val.price = InputToInt_store();
+            InsertAt(list_barang, val, list_barang->count);
+        } else if (compareStrings(CurrentWord.TabWord, "Tolak")) {
             printf("Barang %s Dihapus dari Antrian!\n", val.name);
         } else {
             enqueue(antrian_barang, val);
@@ -81,7 +79,7 @@ void store_supply(Antrian *antrian_barang, BarangDin *list_barang) {
     }
 }
 
-void store_remove(BarangDin *list_barang) {
+void store_remove(DinamicItemList *list_barang) {
     int i = 0;
     STARTWORD();
     while (!EndWord) {
@@ -89,7 +87,7 @@ void store_remove(BarangDin *list_barang) {
     }
 
     while (i < Length(*list_barang)) {
-        if (isWordEqual(CurrentWord, (*list_barang).A[i].name)) {
+        if (compareStrings(CurrentWord.TabWord, (*list_barang).items[i].name)) {
             break;
         }
         i++;
@@ -104,7 +102,7 @@ void store_remove(BarangDin *list_barang) {
 }
 
 // int main() {
-//     BarangDin list_barang = MakeBarangDin(); // Membuat list barang kosong
+//     Barang list_barang = MakeBarang(); // Membuat list barang kosong
 //     Antrian antrian_barang;                  // Membuat antrian barang kosong
 //     CreateQueue(&antrian_barang);       // Inisialisasi antrian
 
@@ -161,7 +159,7 @@ void store_remove(BarangDin *list_barang) {
 //     } while (pilihan != 5);
 
 //     // Membersihkan memori
-//     DeallocateBarangDin(&list_barang);
+//     DeallocateBarang(&list_barang);
     
 //     return 0;
 // }

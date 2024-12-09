@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "./Folder ADT/mesinkarakter.h"
+#include "./Folder ADT/mesinkata.h"
 #include "WORDL3.h"
 
 
