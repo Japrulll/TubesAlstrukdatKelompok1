@@ -1,23 +1,37 @@
-##deskripsi program
+"Bismillah Lancar Jaya Tubes"
+
+---
+
+# Purrmart Kelompok 8 K02
+
+## Deskripsi Program
 
 PURRMART merupakan sebuah aplikasi dengan sistem jual beli ke Borma berbasis CLI (command-line interface) yang mana sistem tersebut penting untuk membantu membawakan kemenangan bagi OWCA. Aplikasi PURRMART dibuat dengan menggunakan bahasa C dan memanfaatkan struktur Abstract Data Type (ADT) seperti ADT kustom, ADT List, ADT Mesin Karakter dan ADT Mesin Kata, dan ADT Queue.
 Dalam sistem ini, terdapat fitur-fitur untuk menampilkan daftar barang, menambah barang baru, menyimpan dan membeli barang, menampilkan barang yang dibeli, mengelola wishlist user, dan bekerja untuk menghasilkan uang. Fitur-fitur tersebut direalisasikan melalui kode program yang terdiri dari main menu dan berisikan welcome menu, serta beberapa command seperti START, LOAD, dan juga HELP. Setelah itu, program akan berisikan login menu, yang terdiri dari command LOGIN, REGISTER, dan HELP. Terakhir, pengguna akan masuk ke main menu dan beberapa penanganan command lain sehingga program akan terus menerima command hingga diberikan command QUIT yang berlaku pada semua menu untuk keluar dari program.
 
 
-## anggota
-Kelompok 8 K02:
+## Anggota :
+- Farella Kamala Budianto / 18223046
+- Ananda Fajrul Zidan / 18223067
+- Muhammad Arya Putra Prihastono / 18223068
+- Muhammad Refino Ramadhan / 18223070
+- Hans Joseph B. W. Silitonga / 18223072
+- Michael Jeremi Bungaran S / 18221136
 
-Farella Kamala Budianto/18223046
-Ananda Fajrul Zidan/18223067
-Muhammad Arya Putra Prihastono/18223068
-Muhammad Refino Ramadhan/18223070
-Hans Joseph B. W. Silitonga/18223072
-Michael Jeremi Bungaran S/18221136
+## Requirements :
+- gcc (hanya untuk mengkompile program)
 
+## Cara Mengkompile Program
+1. Buka terminal dan set lokasi folder terminal ke tempat source codenya berada
+2. Copy command di bawah ini dan paste di terminal, lalu enter
+```
+gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" -o main.exe
+```
+3. Hasil kompile dapat berupa main.exe yang terletak pada lokasi folder tersebut
 
-## cara run
-di gcc ketik
-gcc main.c load.c save.c help.c mesinkata.c mesinkarakter.c ADTFile.c ADTItem.c ADTUser.c masukdaftar.c -o main.exe
-
-lalu di terminal ketik
-./main.exe
+## Cara Menjalankan Program
+1. Pastikan terdapat folder bernama "save" yang di dalamnya terdapat file "default_save.txt", berada di direktori yang sama dengan main.exe.
+2. Buka terminal dan arahkan lokasi kerja terminal ke direktori tempat file main.exe berada.
+3. Jalankan perintah berikut di terminal:
+`./main.exe`
+4. Program akan mulai berjalan dalam terminal.
