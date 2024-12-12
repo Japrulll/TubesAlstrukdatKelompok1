@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "ADTFile.h"
-
+#include "ADTLinkedList.h"
+#include "ADTStack.h"
 void copyString(char* src, char* dest){
     int i = 0;
     while(src[i] != '\0'){
@@ -29,6 +30,8 @@ void display(DinamicItemList *itemlist, StaticUserList *userlist){
     }
     for (int i = 0; i < userlist->count; i++){
         printf("%d %s %s\n", userlist->users[i].money, userlist->users[i].name, userlist->users[i].password);
+        printStack(&userlist->users[i].riwayat_pembelian);
+        PrintInfo(userlist->users[i].wishlist);
     }
 }
 

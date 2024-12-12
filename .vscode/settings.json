@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "adtfile.h": "c",
+        "adtstack.h": "c",
+        "adtlinkedlist.h": "c"
+    }
+}
