@@ -42,7 +42,7 @@ void DealokasiLL (address *P){
 address SearchLL (List L, char* X){
     address P = First(L);
     while (P != Nil){
-        if (Info(P) == X){
+        if (compareStrings(Info(P), X)){
             return P;
         }
         P = Next(P);
@@ -208,17 +208,17 @@ void DelAfter (List *L, address *Pdel, address Prec){
 /*      Pdel adalah alamat elemen list yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List L){
-    printf("[");
+void PrintInfo (List L, FILE* file){
+    //printf("[");
     address P = First(L);
     while (P != Nil){
-        printf("%s", Info(P));
+        fprintf(file, "%s\n", Info(P));
         P = Next(P);
-        if (P != Nil){
-            printf(",");
-        }
+        // if (P != Nil){
+        //     printf(",");
+        // }
     }
-    printf("]\n");
+    //printf("]\n");
 
 }
 /* I.S. List mungkin kosong */
@@ -236,3 +236,16 @@ int NbElmt (List L){
     return count;
 }
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
+void PrintInfoDebug (List L){
+    printf("[");
+    address P = First(L);
+    while (P != Nil){
+        printf("%s", Info(P));
+        P = Next(P);
+        if (P != Nil){
+             printf(",");
+        }
+    }
+    printf("]\n");
+
+}

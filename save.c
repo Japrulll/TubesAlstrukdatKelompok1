@@ -13,7 +13,7 @@ void populateList(DinamicItemList *itemList, StaticUserList *userList){
 }
 */
 
-void savefilename(char* filename,DinamicItemList itemList,StaticUserList userList){
+void savefilename(char* filename,DinamicItemList *itemList,StaticUserList *userList){
     char filepath[300];
     constructfilepath(filepath, "./save/", filename);
     // DinamicItemList itemList;
@@ -22,9 +22,8 @@ void savefilename(char* filename,DinamicItemList itemList,StaticUserList userLis
     // initStaticUserList(&userList);
     //populateList(&itemList, &userList);
     FILE *file = fopen(filepath, "w");
-    writeToFile(file, &itemList, &userList);
+    writeToFile(file, itemList, userList);
 }
-
 /*int main(){
     savefilename("genshin123.txt");
 

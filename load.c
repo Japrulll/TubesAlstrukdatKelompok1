@@ -51,18 +51,18 @@ void loadFile(char*filename,DinamicItemList *itemList,StaticUserList *userList){
                 fscanf(file, "%d", &riwayatHarga);
                 fgetc(file);
                 readline(file, riwayatBarang);
-                printf("%d %s\n", riwayatHarga, riwayatBarang);
+                //printf("%d %s\n", riwayatHarga, riwayatBarang);
                 Push(&riwayat, riwayatHarga, riwayatBarang);
             }
-            printStack(&riwayat);
+            //printStack(&riwayat);
             fscanf(file, "%d", &wishlistCount);
             fgetc(file);
             for (int j = 0; j < wishlistCount; j++){
                 readline(file, wishlistBarang);
-                printf("%s\n", wishlistBarang);
+                //printf("%s\n", wishlistBarang);
                 InsVLast(&wishlist, wishlistBarang);
             }
-            PrintInfo(wishlist);
+            //PrintInfo(wishlist);
             addUser(userList, money, user, pass, &riwayat, &wishlist);
         }
         
@@ -78,8 +78,7 @@ void loadFile(char*filename,DinamicItemList *itemList,StaticUserList *userList){
 
 }
 
-
-
+/*
 int main(){
     char input[MAX_LEN];
     char namafile[MAX_LEN];
@@ -100,4 +99,6 @@ int main(){
     StaticUserList userList;
     DinamicItemList itemList;
     loadFile(namafile, &itemList, &userList);
+    savefilename("test123.txt",&itemList, &userList);
 }
+*/

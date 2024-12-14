@@ -2,6 +2,8 @@
     "files.associations": {
         "adtfile.h": "c",
         "adtstack.h": "c",
-        "adtlinkedlist.h": "c"
+        "adtlinkedlist.h": "c",
+        "stdlib.h": "c",
+        "boolean.h": "c"
     }
 }

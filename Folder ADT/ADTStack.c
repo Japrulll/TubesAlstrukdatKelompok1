@@ -1,6 +1,7 @@
 #include "boolean.h"
 #include "ADTStack.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include "ADTFile.h"
 
 /* I.S. sembarang; */
@@ -9,6 +10,10 @@
 /* Ciri stack kosong : TOP bernilai Nil */
 void CreateEmptyS(Stack *S){
     Top(*S) = NilS;
+    for (int i = 0; i < sizeof(S->T)/sizeof(S->T[0]); i++){
+        S->T[i].totalHarga = 0;
+        copyString("",S->T[i].namaBarang);
+    }
 }
 
 
@@ -63,13 +68,11 @@ void copyStack(Stack *S, Stack *S2){
     S->TOP = S2->TOP;
 }
 
-void printStack(Stack *S){
+void printStack(Stack *S, FILE* file){
     if (Top(*S) == NilS){
-        printf("Stack kosong\n");
         return;
     }
-    for (int i = 0; i < sizeof(S->T)/sizeof(S->T[0]); i++){
-        printf("%d %s|", S->T[i].totalHarga, S->T[i].namaBarang);
+    for (int i = 0; i <= S->TOP; i++){
+        fprintf(file, "%d %s\n", S->T[i].totalHarga, S->T[i].namaBarang);
     }
-    printf("\n");
 }

@@ -33,7 +33,8 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 #include "./Folder ADT/mesinkarakter.h"
 #include "./Folder ADT/boolean.h"
 #include "./Folder ADT/queue.h"
-
+#include "./Folder ADT/ADTLinkedList.h"
+#include "./Folder ADT/ADTStack.h"
 
 // global states
 boolean active;
@@ -67,12 +68,29 @@ void start(DinamicItemList *item,StaticUserList *user){
     addItem(item, 20, "Lalabu");
     addItem(item, 20, "Ayam Goreng Crisbar");
 
-
-    addUser(user, 100, "admin", "alstrukdatkeren");
-    addUser(user, 25, "praktikan", "kerenbangetkak");
+    Stack riwayat;
+    List wishlist;
+    CreateEmptyS(&riwayat);
+    CreateEmptyLL(&wishlist);
+    Push(&riwayat, 40, "AK47");
+    Push(&riwayat, 100, "AK47");
+    Push(&riwayat, 35, "Lalabu");
+    Push(&riwayat, 10, "AK47");
+    Push(&riwayat, 500, "Meong");
+    Push(&riwayat, 20, "Ayam Goreng Crisbar");
+    InsVLast(&wishlist, "Ayam Goreng Crisbar");
+    InsVLast(&wishlist, "AK47");
     
-    savefilename("default_save.txt",*item,*user);
-    // loadFile("default_save.txt",item,user);  
+    addUser(user, 100, "admin", "alstrukdatkeren", &riwayat, &wishlist);
+    Stack riwayat2;
+    List wishlist2;
+    CreateEmptyS(&riwayat2);
+    CreateEmptyLL(&wishlist2);
+    InsVLast(&wishlist2, "Meong");
+    addUser(user, 25, "praktikan", "kerenbangetkak", &riwayat2, &wishlist2);
+    
+    savefilename("default_save.txt",item,user);
+    loadFile("default_save.txt",item,user);  
 }
 
 
@@ -83,7 +101,7 @@ void quit(){ // this is unnesscesary
         STARTWORD();
         if (CurrentWord.TabWord[0] == 'y'){
             users.users[current_index].money = current.money;
-            savefilename(savename,items,users);
+            savefilename(savename,&items,&users);
         }
         if (logged == true){
             logged = logout(&current,&current_index);
@@ -252,7 +270,7 @@ int main(){
                         STARTWORD();
                         copyString(CurrentWord.TabWord,savename);
                     }
-                    savefilename(savename,items,users);
+                    savefilename(savename,&items,&users);
                     inputdelay();
                 }
                 

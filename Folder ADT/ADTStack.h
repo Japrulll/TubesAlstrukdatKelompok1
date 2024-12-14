@@ -5,6 +5,8 @@
 #ifndef stackt_H
 #define stackt_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "boolean.h"
 
 #define NilS -1
@@ -61,7 +63,7 @@ void Pop(Stack * S, int* total, char* nama);
 
 void copyStack(Stack *S, Stack *S2);
 
-void printStack(Stack *S);
+void printStack(Stack *S, FILE* file);
 
 
 #endif

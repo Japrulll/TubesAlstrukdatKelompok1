@@ -30,8 +30,8 @@ void display(DinamicItemList *itemlist, StaticUserList *userlist){
     }
     for (int i = 0; i < userlist->count; i++){
         printf("%d %s %s\n", userlist->users[i].money, userlist->users[i].name, userlist->users[i].password);
-        printStack(&userlist->users[i].riwayat_pembelian);
-        PrintInfo(userlist->users[i].wishlist);
+        // printStack(&userlist->users[i].riwayat_pembelian);
+        // PrintInfo(userlist->users[i].wishlist);
     }
 }
 
@@ -70,6 +70,10 @@ void writeToFile(FILE *file, DinamicItemList *itemList, StaticUserList *userList
         fprintf(file, "%d\n", userList->count);
         for (int i = 0; i<userList->count; i++){
             fprintf(file, "%d %s %s\n", userList->users[i].money, userList->users[i].name, userList->users[i].password);
+            fprintf(file, "%d\n", userList->users[i].riwayat_pembelian.TOP+1);
+            printStack(&userList->users[i].riwayat_pembelian, file);
+            fprintf(file, "%d\n", NbElmt(userList->users[i].wishlist));
+            PrintInfo(userList->users[i].wishlist, file);
         }
         printf("Save file berhasil disimpan.\n");
         fclose(file);
