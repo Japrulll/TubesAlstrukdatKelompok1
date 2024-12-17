@@ -227,7 +227,7 @@ int main(){
                 else if(CurrentWord.TabWord[0] == '2'){
                     while(!back){
                         // ############## Challange menu ##################
-                        displayChallange();
+                        displayChallenge();
                         STARTWORD();
                         if (CurrentWord.TabWord[0] == '1'){
                             current.money = Tebak_Angka(current.money);
