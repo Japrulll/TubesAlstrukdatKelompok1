@@ -33,5 +33,7 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 1. Pastikan terdapat folder bernama "save" yang di dalamnya terdapat file "default_save.txt", berada di direktori yang sama dengan main.exe.
 2. Buka terminal dan arahkan lokasi kerja terminal ke direktori tempat file main.exe berada.
 3. Jalankan perintah berikut di terminal:
-`./main.exe`
+`./main.exe`.
 4. Program akan mulai berjalan dalam terminal.
+
+
