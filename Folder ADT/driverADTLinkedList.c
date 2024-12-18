@@ -8,31 +8,50 @@
 int main(){
     List l1;
     CreateEmptyLL(&l1);
+    printf("---list sekarang kosong---\n");
     printf("isEmpty: %d\n", IsEmptyLL(l1)); //akan print 1
+    
+    printf("\n");
+
+    printf("---uji insert value last dan first---\n");
     InsVLast(&l1, "item1");
     InsVLast(&l1, "item2");
     InsVFirst(&l1, "item3");
     PrintInfoDebug(l1); //[item3, item1, item2]
+    
+    printf("\n");
+
     address newNode = AlokasiLL("item4");
     address p = SearchLL(l1, "item1");
+    printf("---uji insertAfter---\n");
     InsertAfter(&l1, newNode, p);
     PrintInfoDebug(l1); //[item3, item1, item4, item2]
     
+    printf("\n");
+
+    printf("---uji fungsi untuk menghitung banyaknya elemen dalam list---\n");
     printf("Jumlah elemen dalam list: %d\n", NbElmt(l1));//output 4
 
+    printf("\n");
+
+    printf("---uji fungsi search---\n");
     address searchResult = SearchLL(l1, "item4");
     if (searchResult != Nil) {
-        printf("item ditemukan di list.\n"); //karena item4 terdapat pada list, maka akan print bahwa item ditemukan
+        printf("item4 ditemukan di list.\n"); //karena item4 terdapat pada list, maka akan print bahwa item ditemukan
     } else {
-        printf("item tidak ditemukan di list.\n");
+        printf("item4 tidak ditemukan di list.\n");
     }
 
     searchResult = SearchLL(l1, "item5");
     if (searchResult != Nil) {
-        printf("item ditemukan di list.\n");
+        printf("item5 ditemukan di list.\n");
     } else {
-        printf("item tidak ditemukan di list.\n"); //karena item5 TIDAK terdapat pada list, maka akan print item tidak ditemukan
+        printf("item5 tidak ditemukan di list.\n"); //karena item5 TIDAK terdapat pada list, maka akan print item tidak ditemukan
     }
+    
+    printf("\n");
+
+    printf("---uji fungsi delete---\n");
     char deletedItem[10];
     DelVFirst(&l1, deletedItem);
     printf("Elemen pertama yang dihapus: %s\n", deletedItem);//delete item3
@@ -48,7 +67,9 @@ int main(){
 
     printf("isEmpty: %d\n", IsEmptyLL(l1)); //akan print 0 karena di dalam list tidak kosong, ada item4 -> isempty? -> False    
     
+    printf("\n");
 
+    printf("---uji fungsi printinfo pada file---");
     FILE *file;
     List l2;
     CreateEmptyLL(&l2);
@@ -67,7 +88,6 @@ int main(){
     PrintInfo(l2, file);
     fclose(file);
     printf("Isi dalam list telah dicetak ke file 'ujicoba.txt'\n");
-
-
+    
     return 0;
 }
