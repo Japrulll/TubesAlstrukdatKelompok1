@@ -21,6 +21,7 @@ typedef struct {
 #define Items(list) (list).items
 #define Count(list) (list).count
 #define Capacity(list) (list).capacity
+#define barang_null (Barang){.name = [''], .price = 0}
 
 
 void initDinamicItemList(DinamicItemList *list);
@@ -41,7 +42,9 @@ int Length(DinamicItemList list);
 
 boolean IsEmpty(DinamicItemList list);
 
-boolean isIn(char *what,DinamicItemList list);
+boolean isIn(DinamicItemList list,char *what);
+
+Barang getBarang(DinamicItemList list,char *name);
 
 void InsertAt(DinamicItemList *array, Barang el, int i);
 

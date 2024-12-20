@@ -37,13 +37,22 @@ boolean IsEmpty(DinamicItemList list){
     return list.count == 0;
 }
 
-boolean isIn(char *what,DinamicItemList list){
+boolean isIn(DinamicItemList list,char *what){
     for (int i = 0; i<list.count;i++){
         if(compareStrings(list.items[i].name,what)){
             return true;
         }
     }
     return false;
+}
+
+Barang getBarang(DinamicItemList list,char *name){
+    for (int i = 0; i<list.count;i++){
+        if(compareStrings(list.items[i].name,name)){
+            return list.items[i];
+        }
+    }
+    // need null return
 }
 
 void InsertAt(DinamicItemList *array, Barang el, int i) {
