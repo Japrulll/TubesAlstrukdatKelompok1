@@ -36,14 +36,14 @@ int main(){
 
     printf("---uji fungsi search---\n");
     address searchResult = SearchLL(l1, "item4");
-    if (searchResult != Nil) {
+    if (searchResult != NilList) {
         printf("item4 ditemukan di list.\n"); //karena item4 terdapat pada list, maka akan print bahwa item ditemukan
     } else {
         printf("item4 tidak ditemukan di list.\n");
     }
 
     searchResult = SearchLL(l1, "item5");
-    if (searchResult != Nil) {
+    if (searchResult != NilList) {
         printf("item5 ditemukan di list.\n");
     } else {
         printf("item5 tidak ditemukan di list.\n"); //karena item5 TIDAK terdapat pada list, maka akan print item tidak ditemukan

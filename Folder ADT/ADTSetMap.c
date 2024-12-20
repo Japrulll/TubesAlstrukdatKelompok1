@@ -24,13 +24,13 @@ void CreateEmptyMap(Map *M){
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
-    (*M).Count = Nil;
+    (*M).Count = NilMap;
 }
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
 boolean IsEmptyMap(Map M){
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
-    return (M.Count == Nil);
+    return (M.Count == NilMap);
 }
 boolean IsFullMap(Map M){
 /* Mengirim true jika Map M penuh */
@@ -95,7 +95,7 @@ boolean IsMemberMap(Map M, keytype k){
 
 
 void UpdateMap(Map *M, keytype k, valuetype v){
-    address idx = 0;
+    addressMap idx = 0;
     boolean isin = false;  
     while (idx < M->Count) {
         if (string_compare(M->Elements[idx].nama_item,k)) {

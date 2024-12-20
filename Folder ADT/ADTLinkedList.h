@@ -3,7 +3,7 @@
 
 #include "boolean.h"
 
-#define Nil NULL
+#define NilList NULL
 
 //typedef struct LLinfotype{char X[100];}LLinfotype;
 typedef struct tElmtlist *address;

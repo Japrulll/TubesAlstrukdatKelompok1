@@ -3,12 +3,12 @@
 
 #include "boolean.h"
 
-#define Nil 0
+#define NilMap 0
 #define Undefined -696969
 
 typedef char keytype[100];
 typedef int valuetype;
-typedef int address;
+typedef int addressMap;
 
 typedef struct {
 	keytype nama_item;
@@ -17,7 +17,7 @@ typedef struct {
 
 typedef struct {
 	infotype Elements[100];
-	address Count;
+	addressMap Count;
 } Map;
 
 

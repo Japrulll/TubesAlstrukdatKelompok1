@@ -63,13 +63,13 @@ int main() {
     printf("\n");
 
     printf("---uji fungsi isIn---\n");
-    if (isIn("Almond Tofu", itemList)){
+    if (isIn(itemList, "Almond Tofu")){
         printf("Apakah ada 'Almond Tofu' dalam list? : Ada\n");//akan print bagian ini karena Almond Tofu terdapat dalam list
     }
     else{
         printf("Apakah ada 'Almond Tofu' dalam list? : Tidak ada\n");
     }
-    if (isIn("Onigiri", itemList)){
+    if (isIn(itemList, "Onigiri")){
         printf("Apakah ada 'Onigiri' dalam list? : Ya\n");
     }
     else{
