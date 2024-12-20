@@ -4,7 +4,27 @@
 #include "ADTFile.h"
 #include "ADTLinkedList.h"
 #include "ADTStack.h"
+#include "ADTUser.h"
+#include "ADTItem.h"
 
+
+
+void populateList(DinamicItemList *itemList, StaticUserList *userList) {
+    initDinamicItemList(itemList);
+    addItem(itemList, 50, "Geoculus");
+    addItem(itemList, 100, "Mint Jelly");
+
+    initStaticUserList(userList);
+    Stack history_pembelian;
+    CreateEmptyS(&history_pembelian);
+    Push(&history_pembelian, 200, "Almond_Tofu");
+
+    List wishlist;
+    CreateEmptyLL(&wishlist);
+    InsVLast(&wishlist, "Anemoculus");
+
+    addUser(userList, 100, "kazuha", "kaedehara", &history_pembelian, &wishlist);
+}
 
 int main() {
     printf("---uji fungsi copyString---\n");
@@ -42,7 +62,7 @@ int main() {
     file = fopen("ujicobafile.txt", "r");
     char buffer[100];
     readline(file, buffer);
-    printf("Hasil dari fungsi readline: %s\n", buffer); //akan print kalimat yang ada di file ujicobafile.txt
+    printf("Hasil dari fungsi readline:\n%s\n", buffer); //akan print kalimat yang ada di file ujicobafile.txt
     fclose(file);
 
     printf("\n");
@@ -62,49 +82,38 @@ int main() {
 
     printf("\n");
    
-    
+
     printf("---uji fungsi writeToFile---\n");
-    
-    DinamicItemList itemList;
-    itemList.count = 2;
-    itemList.items[0].price = 100;
-    copyString("itemA", itemList.items[0].name);
-    itemList.items[1].price = 200;
-    copyString("itemB", itemList.items[1].name);
+    StaticUserList userListData;
+    DinamicItemList itemListData;
 
-    StaticUserList userList;
-    userList.count = 1;
-    userList.users[0].money = 500;
-    copyString("user1", userList.users[0].name);
-    copyString("password1", userList.users[0].password);
-    CreateEmptyS(&userList.users[0].riwayat_pembelian);
-    Push(&userList.users[0].riwayat_pembelian, 123, "nama");
-    CreateEmptyLL(&userList.users[0].wishlist);
-    InsVLast(&userList.users[0].wishlist, "wishlistItem1");
+    initDinamicItemList(&itemListData);
+    initStaticUserList(&userListData);
+    populateList(&itemListData, &userListData);
 
-    FILE *file_write = fopen("testWriteToFile.txt", "w");
-    if (file_write == NULL) {
-        printf("Gagal membuka file untuk menulis.\n");
+    const char *filePath = "ujicoba_writeToFile.txt";
+
+    FILE *fileWriter = fopen(filePath, "w");
+    if (fileWriter == NULL) {
+        printf("Gagal membuka file untuk menulis: %s\n", filePath);
         return 1;
     }
-    printf("File berhasil dibuka untuk menulis\n");
-    
-    writeToFile(file_write, &itemList, &userList);
-    fclose(file_write);
-    printf("Data telah disimpan ke 'testWriteToFile.txt'.\n");
+    writeToFile(fileWriter, &itemListData, &userListData);
+    fclose(fileWriter);
+    printf("Data telah berhasil ditulis ke file: %s\n", filePath);
 
-    printf("Isi file testWriteToFile.txt:\n");
-    FILE *file_read = fopen("testWriteToFile.txt", "r");
-    if (file_read == NULL) {
-        printf("Gagal membuka file untuk membaca.\n");
+    FILE *fileReader = fopen(filePath, "r");
+    if (fileReader == NULL) {
+        printf("Gagal membuka file untuk membaca: %s\n", filePath);
         return 1;
     }
 
+    printf("Isi file '%s':\n", filePath);
     char c;
-    while ((c = fgetc(file_read)) != EOF){
+    while ((c = fgetc(fileReader)) != EOF) {
         putchar(c);
     }
-    fclose(file_read);
+    fclose(fileReader);
 
     return 0;
 }
