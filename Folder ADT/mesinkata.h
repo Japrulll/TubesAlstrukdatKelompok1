@@ -49,6 +49,6 @@ void CopyWord();
 // boolean isWordEqual(Word word, char* str);
 // boolean isIn(Word Word, BarangDin NamaItem);
 
-boolean isWordEqual(Word word, char* str);
+void AS_WORD();
 
 #endif
