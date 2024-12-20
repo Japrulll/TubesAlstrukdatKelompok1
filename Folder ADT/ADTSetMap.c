@@ -56,7 +56,7 @@ void InsertMap(Map *M, keytype k, valuetype v){
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
-    if (!IsMember(*M,k)){
+    if (!IsMemberMap(*M,k)){
         int i = 0;
         copy_string(k, (*M).Elements[(*M).Count].nama_item);
         (*M).Elements[(*M).Count].qty = v;
@@ -69,7 +69,7 @@ void DeleteMap(Map *M, keytype k){
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
-    if (IsMember(*M,k)){
+    if (IsMemberMap(*M,k)){
         int i = 0;
         while (!string_compare(k,(*M).Elements[i].nama_item)){
             i++;
@@ -98,14 +98,14 @@ void UpdateMap(Map *M, keytype k, valuetype v){
     address idx = 0;
     boolean isin = false;  
     while (idx < M->Count) {
-        if (compareStrings(M->Elements[idx].nama_item,k)) {
+        if (string_compare(M->Elements[idx].nama_item,k)) {
             M->Elements[idx].qty = v;
             isin = true;
         }
         idx++;
     }
     if (!isin && (*M).Count < 100 /*maxel*/){
-        copyString(k,M->Elements[M->Count].nama_item);
+        copy_string(k,M->Elements[M->Count].nama_item);
         // M->Elements[M->Count].Key = k;
 
         M->Elements[M->Count].qty = v;
