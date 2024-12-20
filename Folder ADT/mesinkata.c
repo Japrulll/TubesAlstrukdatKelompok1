@@ -34,6 +34,25 @@ void STARTWORD(){
     }
 }
 
+void STARTWORDBLANKS(){
+    
+    CurrentWord.Length = 0;
+/* I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+    START();
+    IgnoreBlanks();
+    if (currentChar == MARK){
+        EndWord = true;
+    }
+
+    else {
+        EndWord = false;
+        CopyWordBlanks();
+    }
+}
+
 void ADVWORD(){
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
@@ -50,6 +69,22 @@ void ADVWORD(){
    }
 }
 
+void ADVWORDBLANKS(){
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentChar = MARK, EndWord = true.
+   Proses : Akuisisi kata menggunakan procedure SalinWord */
+   //IgnoreBlanks();
+   if ( currentChar == MARK ){
+        EndWord = true;
+   }
+   else{
+        EndWord = false;
+        CopyWordBlanks();
+   }
+}
+
 void CopyWord(){
     for (int i = 0;i<100;i++){
         if (CurrentWord.TabWord[i]=='\0'){
@@ -61,6 +96,28 @@ void CopyWord(){
     }
     int idx = 0;
     while ((currentChar != MARK && currentChar != BLANK) && (idx < NMax)){
+        CurrentWord.TabWord[idx] = GetCC();
+        ADV();
+        idx++;
+    } 
+    CurrentWord.Length = idx;
+    IgnoreBlanks();
+    if ( currentChar == MARK ){
+        EndWord = true;
+   }
+}
+
+void CopyWordBlanks(){
+    for (int i = 0;i<100;i++){
+        if (CurrentWord.TabWord[i]=='\0'){
+            break;
+        }
+        else{
+            CurrentWord.TabWord[i] = '\0';
+        }
+    }
+    int idx = 0;
+    while ((currentChar != MARK) && (idx < NMax)){
         CurrentWord.TabWord[idx] = GetCC();
         ADV();
         idx++;
