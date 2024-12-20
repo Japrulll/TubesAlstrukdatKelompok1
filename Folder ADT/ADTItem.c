@@ -47,7 +47,7 @@ boolean isIn(DinamicItemList list,char *what){
 }
 
 int GetIndex(DinamicItemList list, char *what){
-    if (isIn(what, list)){
+    if (isIn(list,what)){
         for (int i = 0; i<list.count;i++){
             if(compareStrings(list.items[i].name,what)){
                 return i;
