@@ -7,7 +7,7 @@
 
 
 void cartadd(Map *cart,DinamicItemList list,char *produk,int jumlah){
-    if (isIn(produk,list)){
+    if (isIn(list, produk)){
         valuetype prev = Value(*cart,produk);
         UpdateMap(cart,produk,jumlah+prev);
     }
