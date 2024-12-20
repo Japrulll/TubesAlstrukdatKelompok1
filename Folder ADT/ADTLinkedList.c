@@ -160,7 +160,25 @@ void DelFirst (List *L, address *P){
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 void DelP (List *L, char*X){
     address P = First(*L), Prec = Nil;
-    while (P != Nil && Info(P) != X){
+    while (P != Nil) {
+        // Bandingkan string P->Info dengan X
+        int i = 0;
+        int isEqual = 1; // Flag untuk cek kesamaan
+        while (X[i] != '\0' && Info(P)[i] != '\0') {
+            if (X[i] != Info(P)[i]) {
+                isEqual = 0;
+                break;
+            }
+            i++;
+        }
+        if (X[i] != '\0' || Info(P)[i] != '\0') { // Pastikan panjangnya sama
+            isEqual = 0;
+        }
+        
+        if (isEqual) { // Jika string cocok
+            break;
+        }
+        
         Prec = P;
         P = Next(P);
     }
