@@ -46,13 +46,16 @@ boolean isIn(DinamicItemList list,char *what){
     return false;
 }
 
-Barang getBarang(DinamicItemList list,char *name){
-    for (int i = 0; i<list.count;i++){
-        if(compareStrings(list.items[i].name,name)){
-            return list.items[i];
+int GetIndex(DinamicItemList list, char *what){
+    if (isIn(what, list)){
+        for (int i = 0; i<list.count;i++){
+            if(compareStrings(list.items[i].name,what)){
+                return i;
+            }
         }
+        return Undefined;   
     }
-    // need null return
+    return Undefined;
 }
 
 void InsertAt(DinamicItemList *array, Barang el, int i) {

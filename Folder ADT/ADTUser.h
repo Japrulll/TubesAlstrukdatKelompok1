@@ -5,13 +5,14 @@
 #include <stdlib.h>
 #include "ADTLinkedList.h"
 #include "ADTStack.h"
+#include "ADTSetMap.h"
 #define MAX_LEN 100
 
 typedef struct {
     char name[MAX_LEN];
     char password[MAX_LEN];
     int money;
-    List keranjang;
+    Map keranjang;
     Stack riwayat_pembelian;
     List wishlist;
 } User;
