@@ -4,6 +4,7 @@
 #include "./Folder ADT/mesinkata.h"
 #include "./Folder ADT/ADTFile.h"
 #include "./Folder ADT/ADTStack.h"
+#include "./Folder ADT/ADTItem.c"
 
 
 void WISHLISTADD (List *wishlist, DinamicItemList items){
@@ -215,6 +216,8 @@ void WISHLISTSHOW (List *wishlist){
 /*
 int main(){
     List wishlist;
+    DinamicItemList Items;
+    initDinamicItemList(&Items);
     CreateEmptyLL (&wishlist);
     int mulai = 1;
     while (mulai==1){
@@ -223,7 +226,7 @@ int main(){
         scanf("%d",&masukan);
         getchar();
         if (masukan==1){
-            WISHLISTADD (&wishlist);
+            WISHLISTADD (&wishlist, Items);
         }
         else if (masukan==2){
             WISHLISTREMOVE (&wishlist);
@@ -239,6 +242,7 @@ int main(){
         }
         else{
             printf("input tidak valid. Masukkan ulang!");
+            mulai=0;
         }
     }
 
