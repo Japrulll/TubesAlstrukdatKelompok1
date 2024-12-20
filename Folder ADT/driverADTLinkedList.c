@@ -70,6 +70,7 @@ int main(){
     printf("\n");
 
     printf("---uji fungsi printinfo pada file---");
+    printf("\n");
     FILE *file;
     List l2;
     CreateEmptyLL(&l2);
