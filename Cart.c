@@ -1,15 +1,15 @@
 #include "Cart.h"
 #include "./Folder ADT/ADTItem.h"
-#include "./Folder ADT/map.h"
+#include "./Folder ADT/ADTSetMap.h"
 
 #include <stdio.h>
 
 
 
 void cartadd(Map *cart,DinamicItemList list,char *produk,int jumlah){
-    if (isIn(list,produk)){
+    if (isIn(produk,list)){
         valuetype prev = Value(*cart,produk);
-        Update(cart,produk,jumlah+prev);
+        UpdateMap(cart,produk,jumlah+prev);
     }
     else{
         return;
@@ -17,9 +17,9 @@ void cartadd(Map *cart,DinamicItemList list,char *produk,int jumlah){
 }
 
 void cartremove(Map *cart,DinamicItemList list,char *produk,int jumlah){
-    if (IsMember(*cart,produk)){
+    if (IsMemberMap(*cart,produk)){
         valuetype prev = Value(*cart,produk);
-        Update(cart,produk,prev-jumlah);
+        UpdateMap(cart,produk,prev-jumlah);
         if (Value(*cart,produk) <=0){
             Delete(cart,produk);
         }
@@ -27,31 +27,32 @@ void cartremove(Map *cart,DinamicItemList list,char *produk,int jumlah){
 }
 
 void cartshow(Map cart,DinamicItemList list){
-    valuetype many;
-    Barang tmpbar;
+    int total = 0;
     for (int i = 0; i<cart.Count; i++){
-        tmpbar = getBarang(list,cart.Elements[i].Key);
-        many = cart.Elements[i].Value;
-        printf("%d %s %d\n",many, tmpbar.name,tmpbar.price * many);
+        Barang tmpbar = list.items[GetIndex(list,cart.Elements[i].nama_item)];
+        valuetype many = cart.Elements[i].qty;
+        int multot = tmpbar.price * many;
+        total += multot;
+        printf("%d %s %d\n",many, tmpbar.name,multot);
+        printf("yang harus dibayar adalah %d\n",total);
     }
+    
 }
 
-int cartpay(Map *cart,DinamicItemList list,int money){
-    if (IsEmptymap(*cart)){
+int cartpay(Map cart,DinamicItemList list,int money){
+    if (IsEmptyMap(cart)){
         printf("nothing here\n");
         return money;
     }
-    int total=0;
-    valuetype many;
-    Barang tmpbar;
-    for (int i = 0; i<(*cart).Count; i++){
-        total += tmpbar.price * many;
-        tmpbar = getBarang(list,(*cart).Elements[i].Key);
-        many = (*cart).Elements[i].Value;
-        printf("%d %s %d\n",many, tmpbar.name,tmpbar.price * many);
+    int total = 0;
+    for (int i = 0; i<cart.Count; i++){
+        Barang tmpbar = list.items[GetIndex(list,cart.Elements[i].nama_item)];
+        valuetype many = cart.Elements[i].qty;
+        int multot = tmpbar.price * many;
+        total += multot;
+        printf("%d %s %d\n",many, tmpbar.name,multot);
+        printf("yang harus dibayar adalah %d\n",total);
     }
-    printf("%d\n",total);
-
     // input for pay what
     boolean pay;
     if(total>money){

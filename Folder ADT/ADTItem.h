@@ -38,6 +38,7 @@ void freeDinamicItemList(DinamicItemList *list);
   supaya memorinya tidak terbuang sia-sia dan bisa digunakan lagi*/
 
 int Length(DinamicItemList list);
+int GetIndex(DinamicItemList list, char *what);
 
 boolean IsEmpty(DinamicItemList list);
 

@@ -46,6 +46,18 @@ boolean isIn(char *what,DinamicItemList list){
     return false;
 }
 
+int GetIndex(DinamicItemList list, char *what){
+    if (isIn(what, list)){
+        for (int i = 0; i<list.count;i++){
+            if(compareStrings(list.items[i].name,what)){
+                return i;
+            }
+        }
+        return Undefined;   
+    }
+    return Undefined;
+}
+
 void InsertAt(DinamicItemList *array, Barang el, int i) {
     if (i < 0 || i > Count(*array)) {
         // Cek jika indeks tidak valid
