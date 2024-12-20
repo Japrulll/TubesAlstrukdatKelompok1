@@ -2,7 +2,6 @@
 #include "mesinkata.h"
 #include "boolean.h"
 #include "mesinkarakter.h"
-// #include "barangdin.h"
 #include "ADTFile.h"
 
 boolean EndWord;
@@ -18,14 +17,6 @@ void IgnoreBlanks(){
 
 void STARTWORD(){
     
-    for (int i = 0;i<100;i++){
-        if (CurrentWord.TabWord[i]=='\0'){
-            break;
-        }
-        else{
-            CurrentWord.TabWord[i] = '\0';
-        }
-    }
     CurrentWord.Length = 0;
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
@@ -36,6 +27,7 @@ void STARTWORD(){
     if (currentChar == MARK){
         EndWord = true;
     }
+
     else {
         EndWord = false;
         CopyWord();
@@ -59,16 +51,27 @@ void ADVWORD(){
 }
 
 void CopyWord(){
+    for (int i = 0;i<100;i++){
+        if (CurrentWord.TabWord[i]=='\0'){
+            break;
+        }
+        else{
+            CurrentWord.TabWord[i] = '\0';
+        }
+    }
     int idx = 0;
-    while ((currentChar != MARK) && (idx < NMax)){
+    while ((currentChar != MARK && currentChar != BLANK) && (idx < NMax)){
         CurrentWord.TabWord[idx] = GetCC();
         ADV();
         idx++;
     } 
     CurrentWord.Length = idx;
-    
-//    CurrentWord.Length = idx;
+    IgnoreBlanks();
+    if ( currentChar == MARK ){
+        EndWord = true;
+   }
 }
+
 boolean isWordEqual(Word word, char* str) {
     int i = 0;
     while (i < word.Length && str[i] != '\0') {
@@ -78,6 +81,15 @@ boolean isWordEqual(Word word, char* str) {
         i++;
     }
     return (i == word.Length && str[i] == '\0');
+}
+
+void AS_WORD(){
+    if (EndWord){
+        STARTWORD();
+    }
+    else{
+        ADVWORD();
+    }
 }
 
 // boolean isIn(Word word, BarangDin list_barang) {
