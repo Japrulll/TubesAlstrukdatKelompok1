@@ -8,7 +8,6 @@
 #include "ADTItem.h"
 
 
-
 void populateList(DinamicItemList *itemList, StaticUserList *userList) {
     initDinamicItemList(itemList);
     addItem(itemList, 50, "Geoculus");
@@ -83,7 +82,7 @@ int main() {
     printf("\n");
    
 
-    printf("---uji fungsi writeToFile---\n");
+    printf("---uji fungsi writeToFile ---\n");
     StaticUserList userListData;
     DinamicItemList itemListData;
 
