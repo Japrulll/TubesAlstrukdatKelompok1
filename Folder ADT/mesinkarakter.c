@@ -47,5 +47,5 @@ boolean IsEOP(){
 }
 
 boolean IsEOF (){
-    return (pita == EOF);
+    return ((int) pita == EOF);
 }
