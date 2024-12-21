@@ -66,4 +66,6 @@ boolean IsMemberMap(Map M, keytype k);
 
 void UpdateMap(Map *M, keytype k, valuetype v);
 
+void bubbleSort_Map(Map *map);
+
 #endif

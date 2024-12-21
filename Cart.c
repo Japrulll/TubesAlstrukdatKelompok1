@@ -1,6 +1,7 @@
 #include "Cart.h"
 #include "./Folder ADT/ADTItem.h"
 #include "./Folder ADT/ADTSetMap.h"
+#include "./Folder ADT/ADTStack.h"
 
 #include <stdio.h>
 
@@ -39,21 +40,27 @@ void cartshow(Map cart,DinamicItemList list){
     
 }
 
-int cartpay(Map cart,DinamicItemList list,int money){
+int cartpay(Map cart,DinamicItemList list,int money, Stack *out){
     if (IsEmptyMap(cart)){
         printf("nothing here\n");
         return money;
     }
     int total = 0;
+    int compare = -999;
+    bubbleSort_Map(&cart);
     for (int i = 0; i<cart.Count; i++){
         Barang tmpbar = list.items[GetIndex(list,cart.Elements[i].nama_item)];
         valuetype many = cart.Elements[i].qty;
         int multot = tmpbar.price * many;
         total += multot;
+        if (multot > compare){
+            compare = multot;
+        }
         printf("%d %s %d\n",many, tmpbar.name,multot);
         printf("yang harus dibayar adalah %d\n",total);
     }
-    // input for pay what
+    Push(out, compare, cart.Elements[0].nama_item);
+    // // input for pay what
     boolean pay;
     if(total>money){
         printf("no money\n");
@@ -61,6 +68,5 @@ int cartpay(Map cart,DinamicItemList list,int money){
     else{
          return money-total;
     }
-   
 }
 

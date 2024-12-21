@@ -116,26 +116,70 @@ void UpdateMap(Map *M, keytype k, valuetype v){
     }    
 }
 
+void bubbleSort_Map(Map *map){
+    for (int i = 0; i < map->Count; i++){
+        for (int j = 0; j < map->Count-i-1; j++){
+            if (map->Elements[j].qty < map->Elements[j+1].qty){
+                infotype temp = map->Elements[j];
+                map->Elements[j] = map->Elements[j+1];
+                map->Elements[j+1] = temp;
+            }
+            else if (map->Elements[j].qty == map->Elements[j+1].qty){
+                if     ((map->Elements[j].nama_item[0] >= 97 && map->Elements[j].nama_item[0] <= 122) 
+                    && (map->Elements[j+1].nama_item[0] >= 65 && map->Elements[j].nama_item[0] <= 90)){
+                        int char_to_upper = map->Elements[j].nama_item[0] - 97 + 65;
+                    if (char_to_upper > map->Elements[j+1].nama_item[0]){
+                        infotype temp = map->Elements[j];
+                        map->Elements[j] = map->Elements[j+1];
+                        map->Elements[j+1] = temp;
+                    }
+                }
+                else if ((map->Elements[j].nama_item[0] >= 65 && map->Elements[j].nama_item[0] <= 90) 
+                    &&  (map->Elements[j+1].nama_item[0] >= 97 && map->Elements[j].nama_item[0] <= 122)){
+                        int char_to_upper = map->Elements[j+1].nama_item[0] - 97 + 65;
+                        if (char_to_upper < map->Elements[j].nama_item[0]){
+                        infotype temp = map->Elements[j+1];
+                        map->Elements[j+1] = map->Elements[j];
+                        map->Elements[j] = temp;
+                         
+                    }
+                }
+                else {
+                    if (map->Elements[j].nama_item[0] > map->Elements[j+1].nama_item[0]){
+                        infotype temp = map->Elements[j];
+                        map->Elements[j] = map->Elements[j+1];
+                        map->Elements[j+1] = temp;
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 
 // int main(){
 //     Map M;
-//     CreateEmpty(&M);
-//     Insert(&M, "anjay", 1);
-//     Insert(&M, "koll", 4);
-//     Insert(&M, "ak69", 3);
-//     Insert(&M, "orkom", 5);
-//     Insert(&M, "kyukurarin", 6);
+//     CreateEmptyMap(&M);
+//     InsertMap(&M, "anjay", 1);
+//     InsertMap(&M, "koll", 4);
+//     InsertMap(&M, "ak69", 3);
+//     InsertMap(&M, "orkom", 6);
+//     InsertMap(&M, "Kyukurarin", 6);
 //     printf("Panjang: %d\n",M.Count);
 
-//     if (IsMember(M,"ak69")){
+//     if (IsMemberMap(M,"ak69")){
 //             printf("yes bener\n");
 //     }
 //     else printf("gaada tai\n");
 //     printf("ini element S.Count bukan yak : %d\n", M.Elements[M.Count].qty);
-//     Delete(&M, "ak69");
+//     DeleteMap(&M, "ak69");
 //     for(int i = 0; i < M.Count; i++){
-//             printf("%d ", M.Elements[i].qty);
+//             printf("%s %d\n",M.Elements[i].nama_item, M.Elements[i].qty);
+//     }
+//     printf("sekarang bubble\n");
+//     bubbleSort_Map(&M);
+//     for(int i = 0; i < M.Count; i++){
+//             printf("%s %d\n",M.Elements[i].nama_item, M.Elements[i].qty);
 //     }
 // }

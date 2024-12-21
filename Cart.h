@@ -2,6 +2,7 @@
 #define CART_H
 #include "./Folder ADT/ADTSetMap.h"
 #include "./Folder ADT/ADTItem.h"
+#include "./Folder ADT/ADTStack.h"
 
 #include <stdio.h>
 
@@ -15,6 +16,6 @@ void cartremove(Map *cart,DinamicItemList list,char *produk,int jumlah);
 void cartshow(Map cart,DinamicItemList list);
 
 // give pay stuff
-int cartpay(Map *cart,DinamicItemList list,int money);
+int cartpay(Map cart,DinamicItemList list,int money, Stack *out);
 
 #endif
