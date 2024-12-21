@@ -21,8 +21,8 @@ int main(){
     
     printf("\n");
 
-    address newNode = AlokasiLL("item4");
-    address p = SearchLL(l1, "item1");
+    addressLL newNode = AlokasiLL("item4");
+    addressLL p = SearchLL(l1, "item1");
     printf("---uji insertAfter---\n");
     InsertAfter(&l1, newNode, p);
     PrintInfoDebug(l1); //[item3, item1, item4, item2]
@@ -35,7 +35,7 @@ int main(){
     printf("\n");
 
     printf("---uji fungsi search---\n");
-    address searchResult = SearchLL(l1, "item4");
+    addressLL searchResult = SearchLL(l1, "item4");
     if (searchResult != NilList) {
         printf("item4 ditemukan di list.\n"); //karena item4 terdapat pada list, maka akan print bahwa item ditemukan
     } else {
