@@ -13,9 +13,9 @@ void cartadd(Map *cart,DinamicItemList list,char *produk,int jumlah);
 void cartremove(Map *cart,DinamicItemList list,char *produk,int jumlah);
 
 // show cart
-void cartshow(Map cart,DinamicItemList list);
+void cartshow(Map *cart,DinamicItemList list);
 
 // give pay stuff
-int cartpay(Map cart,DinamicItemList list,int money, Stack *out);
+int cartpay(Map *cart,DinamicItemList list,Stack *out,int money);
 
 #endif

@@ -18,7 +18,7 @@ typedef struct {
 } User;
 
 typedef struct {
-    User users[MAX_LEN];
+    User users[50];
     int count;
 } StaticUserList;
 
