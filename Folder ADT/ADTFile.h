@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "ADTUser.h"
 #include "ADTItem.h"
-#include "ADTSetMap.h"
+#include "ADTMap.h"
 #define MAX_LEN 100
 
 void copyString(char* src, char* dest);

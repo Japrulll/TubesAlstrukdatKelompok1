@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "ADTSetMap.h"
+#include "ADTMap.h"
 
 int main() {
     Map M;

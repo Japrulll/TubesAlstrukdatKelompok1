@@ -5,6 +5,7 @@
         "adtlinkedlist.h": "c",
         "stdlib.h": "c",
         "boolean.h": "c",
-        "adtsetmap.h": "c"
+        "adtsetmap.h": "c",
+        "adtmap.h": "c"
     }
 }
