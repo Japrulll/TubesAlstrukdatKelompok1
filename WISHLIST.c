@@ -32,7 +32,7 @@ void WISHLISTADD (List *wishlist, DinamicItemList items){
             printf(" ke dalam wishlist!\n");
         }
         else {
-            if((SearchLL(*wishlist, barang))==Nil){
+            if((SearchLL(*wishlist, barang))==NilList){
                 InsVLast(wishlist,barang);
                 address P = SearchLL(*wishlist, barang);
                 printf("Berhasil menambahkan ");
@@ -86,7 +86,7 @@ void WISHLISTREMOVE (List *wishlist){
             }
             barang[CurrentWord.Length] = '\0';
             
-            if((SearchLL(*wishlist, barang))==Nil){
+            if((SearchLL(*wishlist, barang))==NilList){
                 printf("Penghapusan gagal dilakukan! ");
                 printf("%s", barang);
                 printf(" tidak ditemukan di dalam wishlist.\n");
@@ -151,13 +151,13 @@ void WISHLISTSWAP (List *wishlist){
         address P2 = First(*wishlist);
         int idx = 1;
         // Cari elemen ke-i
-        while (P1 != Nil && idx < i) {
+        while (P1 != NilList && idx < i) {
             P1 = Next(P1);
             idx++;
         }
         // Reset indeks dan cari elemen ke-j
         idx = 1;
-        while (P2 != Nil && idx < j) {
+        while (P2 != NilList && idx < j) {
             P2 = Next(P2);
             idx++;
         }
@@ -191,7 +191,7 @@ void WISHLISTSHOW (List *wishlist){
         address P = First(*wishlist);
         int nomor=1;
         printf("Berikut ini adalah isi wishlist kamu: \n");
-        while (P != Nil){
+        while (P != NilList){
             printf("%d ",nomor);
             printf("%s\n", Info(P));
             nomor++;
