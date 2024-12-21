@@ -5,6 +5,10 @@
 #include "./Folder ADT/mesinkata.h"
 #include "./Folder ADT/ADTFile.h"
 #include "./Folder ADT/ADTUser.h"
+#include "./Folder ADT/ADTLinkedList.h"
+#include "./Folder ADT/ADTStack.h"
+#include "./Folder ADT/ADTSetMap.h"
+
 
 // Fungsi untuk membandingkan 2 string
 
@@ -119,7 +123,12 @@ void registerUser(StaticUserList *userList) {  // Tambahkan parameter userList
     copyString(CurrentWord.TabWord, password);
     
     // Simpan data user baru
-    addUser(userList,0,name,password);
+    Stack nill;
+    CreateEmptyS(&nill);
+
+    List noll;
+    CreateEmptyLL(&noll);
+    addUser(userList,0,name,password,&nill,&noll);
     
     // Output keberhasilan
     printf("Akun dengan username %s telah berhasil dibuat. Silakan LOGIN untuk melanjutkan.\n", name);
@@ -138,8 +147,8 @@ boolean login(StaticUserList userList,User *change,int *user_index) {
     printf(">> LOGIN\n");
     // Input username
     printf("Username: ");
-    STARTWORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
-    if (EndWord) { // Validasi input kosong
+    AS_WORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
+    if (compareStrings(CurrentWord.TabWord,"")) { // Validasi input kosong
         printf("Username tidak boleh kosong. Silakan coba lagi.\n");
         return false;
     }
@@ -149,8 +158,8 @@ boolean login(StaticUserList userList,User *change,int *user_index) {
 
     // Memasukkan password
     printf("Password: ");
-    STARTWORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
-    if (EndWord) { // Validasi input kosong
+    AS_WORD(); // Menggunakan fungsi STARTWORD() dari mesin karakter
+    if (compareStrings(CurrentWord.TabWord,"")) { // Validasi input kosong
         printf("Password tidak boleh kosong. Silakan coba lagi.\n");
         return false;
     }
@@ -179,5 +188,8 @@ boolean logout(User *current,int *user_index){
     copyString("null",current->password);
     current->money = -1;
     *user_index = -1;
+    CreateEmptyMap(&current->keranjang);
+    CreateEmptyS(&current->riwayat_pembelian);
+    CreateEmptyLL(&current->wishlist);
     return false;
 }
