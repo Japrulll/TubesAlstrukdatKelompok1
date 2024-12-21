@@ -21,7 +21,7 @@ void printUserList(StaticUserList *list) {
         }
 
         printf("Wishlist:\n");
-        address P = list->users[i].wishlist.First;
+        addressLL P = list->users[i].wishlist.First;
         while (P != NULL) {
             printf(" - %s\n", Info(P));
             P = Next(P);

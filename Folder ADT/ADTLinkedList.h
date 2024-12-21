@@ -6,19 +6,19 @@
 #define NilList NULL
 
 //typedef struct LLinfotype{char X[100];}LLinfotype;
-typedef struct tElmtlist *address;
+typedef struct tElmtlist *addressLL;
 typedef struct tElmtlist { 
 	char info[100];
-	address next;
+	addressLL next;
 } ElmtList;
 typedef struct {
-	address First;
+	addressLL First;
 } List;
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
-/* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
-/* Elemen terakhir list : jika addressnya Last, maka Next(Last)=Nil */
+/* Setiap elemen dengan addressLL P dapat diacu Info(P), Next(P) */
+/* Elemen terakhir list : jika addressLLnya Last, maka Next(Last)=Nil */
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)
@@ -34,20 +34,20 @@ void CreateEmptyLL (List *L);
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-address AlokasiLL (char* X);
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
+addressLL AlokasiLL (char* X);
+/* Mengirimkan addressLL hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressLL tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void DealokasiLL (address *P);
+void DealokasiLL (addressLL *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
+/* Melakukan dealokasi/pengembalian addressLL P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address SearchLL (List L, char* X);
+addressLL SearchLL (List L, char* X);
 /* Mencari apakah ada elemen list dengan info(P)= X */
-/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika ada, mengirimkan addressLL elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
@@ -74,36 +74,36 @@ void DelVLast (List *L, char *X);
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, address P);
+void InsertFirst (List *L, addressLL P);
 /* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
-void InsertAfter (List *L, address P, address Prec);
+/* F.S. Menambahkan elemen ber-addressLL P sebagai elemen pertama */
+void InsertAfter (List *L, addressLL P, addressLL Prec);
 /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
 /*      P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void InsertLast (List *L, address P);
+void InsertLast (List *L, addressLL P);
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List *L, address *P);
+void DelFirst (List *L, addressLL *P);
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 void DelP (List *L, char* X);
 /* I.S. Sembarang */
-/* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
+/* F.S. Jika ada elemen list beraddressLL P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
 /* Jika tidak ada elemen list dengan info(P)=X, maka list tetap */
 /* List mungkin menjadi kosong karena penghapusan */
-void DelLast (List *L, address *P);
+void DelLast (List *L, addressLL *P);
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 /* jika ada */
-void DelAfter (List *L, address *Pdel, address Prec);
+void DelAfter (List *L, addressLL *Pdel, addressLL Prec);
 /* I.S. List tidak kosong. Prec adalah anggota list  */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */

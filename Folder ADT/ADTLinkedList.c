@@ -20,29 +20,29 @@ void CreateEmptyLL (List *L){
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-address AlokasiLL (char* X){
-    address P = (address)malloc(sizeof(ElmtList));
+addressLL AlokasiLL (char* X){
+    addressLL P = (addressLL)malloc(sizeof(ElmtList));
     if (P != NilList) {
         copyString(X, Info(P));
         Next(P) = NilList;
     }
     return P;
 }
-/* Mengirimkan address hasil AlokasiLL sebuah elemen */
-/* Jika AlokasiLL berhasil, maka address tidak nil, dan misalnya */
+/* Mengirimkan addressLL hasil AlokasiLL sebuah elemen */
+/* Jika AlokasiLL berhasil, maka addressLL tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
 /* Jika AlokasiLL gagal, mengirimkan Nil */
-void DealokasiLL (address *P){
+void DealokasiLL (addressLL *P){
     free(*P);
     *P = NilList;
 }
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan d AlokasiLL/pengembalian address P */
+/* Melakukan d AlokasiLL/pengembalian addressLL P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address SearchLL (List L, char* X){
-    address P = First(L);
+addressLL SearchLL (List L, char* X){
+    addressLL P = First(L);
     while (P != NilList){
         if (compareStrings(Info(P), X)){
             return P;
@@ -52,13 +52,13 @@ address SearchLL (List L, char* X){
     return NilList;
 }
 /* Mencari apakah ada elemen list dengan info(P)= X */
-/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika ada, mengirimkan addressLL elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, char* X){
-    address P = AlokasiLL(X);
+    addressLL P = AlokasiLL(X);
     if (P != NilList){
         Next(P) = First(*L);
         First(*L) = P;
@@ -68,12 +68,12 @@ void InsVFirst (List *L, char* X){
 /* F.S. Melakukan AlokasiLL sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika AlokasiLL berhasil */
 void InsVLast (List *L, char* X){
-    address P = AlokasiLL(X);
+    addressLL P = AlokasiLL(X);
     if (P != NilList){
         if (IsEmptyLL(*L)){
             First(*L) = P;
         } else {
-            address Last = First(*L);
+            addressLL Last = First(*L);
             while(Next(Last) != NilList){
                 Last = Next(Last);
             }
@@ -89,7 +89,7 @@ void InsVLast (List *L, char* X){
 /*** PENGHAPUSAN ELEMEN ***/
 void DelVFirst (List *L, char *X){
     if (!IsEmptyLL(*L)){
-        address P = First(*L);
+        addressLL P = First(*L);
         copyString(Info(P), X);
         First(*L) = Next(P);
         DealokasiLL(&P);
@@ -100,7 +100,7 @@ void DelVFirst (List *L, char *X){
 /*      dan alamat elemen pertama di-d AlokasiLL */
 void DelVLast (List *L, char *X){
     if (!IsEmptyLL(*L)){
-        address P = First(*L), Prec = NilList;
+        addressLL P = First(*L), Prec = NilList;
         while (Next(P) != NilList){
             Prec = P;
             P = Next(P);
@@ -121,25 +121,25 @@ void DelVLast (List *L, char *X){
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, address P){
+void InsertFirst (List *L, addressLL P){
     Next(P) = First(*L);
     First(*L) = P;
 }
 /* I.S. Sembarang, P sudah d AlokasiLL  */
-/* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
-void InsertAfter (List *L, address P, address Prec){
+/* F.S. Menambahkan elemen ber-addressLL P sebagai elemen pertama */
+void InsertAfter (List *L, addressLL P, addressLL Prec){
     Next(P) = Next(Prec);
     Next(Prec) = P;
 }
 /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
 /*      P sudah d AlokasiLL  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void InsertLast (List *L, address P){
+void InsertLast (List *L, addressLL P){
     if (IsEmptyLL(*L)){
         InsertFirst(L, P);
     }
     else {
-        address Last = First(*L);
+        addressLL Last = First(*L);
         while (Next(Last) != NilList){
             Last = Next(Last);
         }
@@ -150,7 +150,7 @@ void InsertLast (List *L, address P){
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List *L, address *P){
+void DelFirst (List *L, addressLL *P){
     if(!IsEmptyLL(*L)){
         *P = First(*L);
         First(*L) = Next(*P);
@@ -161,7 +161,7 @@ void DelFirst (List *L, address *P){
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 void DelP (List *L, char*X){
-    address P = First(*L), Prec = NilList;
+    addressLL P = First(*L), Prec = NilList;
     while (P != NilList) {
         // Bandingkan string P->Info dengan X
         int i = 0;
@@ -194,12 +194,12 @@ void DelP (List *L, char*X){
     }
 }
 /* I.S. Sembarang */
-/* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
+/* F.S. Jika ada elemen list beraddressLL P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-d AlokasiLL */
 /* Jika tidak ada elemen list dengan info(P)=X, maka list tetap */
 /* List mungkin menjadi kosong karena penghapusan */
-void DelLast (List *L, address *P){
-    address Last = First(*L), Prec = NilList;
+void DelLast (List *L, addressLL *P){
+    addressLL Last = First(*L), Prec = NilList;
     while(Next(Last) != NilList){
         Prec = Last;
         Last = Next(Last);
@@ -217,7 +217,7 @@ void DelLast (List *L, address *P){
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 /* jika ada */
-void DelAfter (List *L, address *Pdel, address Prec){
+void DelAfter (List *L, addressLL *Pdel, addressLL Prec){
     *Pdel = Next(Prec);
     if (*Pdel != NilList){
         Next(Prec) = Next(*Pdel);
@@ -230,7 +230,7 @@ void DelAfter (List *L, address *Pdel, address Prec){
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L, FILE* file){
     //printf("[");
-    address P = First(L);
+    addressLL P = First(L);
     while (P != NilList){
         fprintf(file, "%s\n", Info(P));
         P = Next(P);
@@ -248,7 +248,7 @@ void PrintInfo (List L, FILE* file){
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah terkecuali untuk newline di akhir output */
 int NbElmt (List L){
     int count = 0;
-    address P = First(L);
+    addressLL P = First(L);
     while (P != NilList){
         count++;
         P = Next(P);
@@ -258,7 +258,7 @@ int NbElmt (List L){
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 void PrintInfoDebug (List L){
     printf("[");
-    address P = First(L);
+    addressLL P = First(L);
     while (P != NilList){
         printf("%s", Info(P));
         P = Next(P);
