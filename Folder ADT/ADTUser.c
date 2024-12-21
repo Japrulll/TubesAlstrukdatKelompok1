@@ -3,6 +3,7 @@
 #include "ADTUser.h"
 #include "ADTFile.h"
 #include "ADTStack.h"
+#include "ADTSetMap.h"
 void initStaticUserList(StaticUserList *list){
     list->count = 0;
 }

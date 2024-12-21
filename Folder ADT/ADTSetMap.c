@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "ADTSetMap.h"
+#include "ADTUser.h"
+#include "ADTFile.h"
 
 void copy_string(char *from, char *to) {
     int i = 0;

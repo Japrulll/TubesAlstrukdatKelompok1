@@ -6,7 +6,7 @@
 #include "ADTStack.h"
 #include "ADTUser.h"
 #include "ADTItem.h"
-
+#include "ADTSetMap.h"
 
 void populateList(DinamicItemList *itemList, StaticUserList *userList) {
     initDinamicItemList(itemList);

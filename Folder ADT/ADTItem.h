@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "ADTSetMap.h"
+
 
 #define MAX_LEN 100
 

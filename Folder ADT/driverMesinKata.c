@@ -22,8 +22,7 @@ int main() {
         ADVWORD();
     }
     printf("%s", CurrentWord.TabWord);
-
-  
+   
 
     printf("\n");
     // Memberi tahu bahwa proses selesai
