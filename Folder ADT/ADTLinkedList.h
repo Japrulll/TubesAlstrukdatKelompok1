@@ -119,5 +119,7 @@ int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 void PrintInfoDebug (List L);
+/* Fungsi ini digunakan untuk mencetak informasi seluruh elemen dalam sebuah linked list 
+untuk keperluan debugging.*/
 
 #endif

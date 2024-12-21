@@ -62,8 +62,9 @@ void Pop(Stack * S, int* total, char* nama);
 /* F.S. X adalah NilSai elemen TOP yang lama, TOP berkurang 1 */
 
 void copyStack(Stack *S, Stack *S2);
+/* Fungsi untuk menyalin seluruh isi elemen dan nilai TOP dari stack source ke stack destination*/
 
 void printStack(Stack *S, FILE* file);
-
+/* Fungsi untuk mencetak seluruh elemen stack ke file, dengan format <totalHarga> <namaBarang> untuk setiap elemen stack*/
 
 #endif

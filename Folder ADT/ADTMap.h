@@ -65,7 +65,10 @@ boolean IsMemberMap(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
 void UpdateMap(Map *M, keytype k, valuetype v);
+/* Menambahkan elemen baru ke Map jika belum ada,
+atau memperbarui nilai qty elemen yang ada jika ditemukan key yang cocok.*/
 
 void bubbleSort_Map(Map *map);
+/* Mengurutkan elemen Map berdasarkan qty secara descending*/
 
 #endif
