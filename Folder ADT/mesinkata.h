@@ -53,7 +53,7 @@ void CopyWord();
 
 void CopyWordBlanks();
 
-//boolean isWordEqual(Word word, char* str);
+// boolean isWordEqual(Word word, char* str);
 // boolean isIn(Word Word, BarangDin NamaItem);
 
 void AS_WORD();
