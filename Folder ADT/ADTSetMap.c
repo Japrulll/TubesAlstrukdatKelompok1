@@ -50,6 +50,17 @@ valuetype Value(Map M, keytype k){
     }
     return Undefined;
 }
+boolean IsMemberMap(Map M, keytype k){
+/* Mengembalikan true jika k adalah member dari M */
+    int i = 0;
+    while (i < M.Count ){
+        if (string_compare(k,M.Elements[i].nama_item) ){
+            return true;
+        }
+        i++;
+    }
+    return false;
+}
 
 void InsertMap(Map *M, keytype k, valuetype v){
 /* Menambahkan Elmt sebagai elemen Map M. */
@@ -57,7 +68,7 @@ void InsertMap(Map *M, keytype k, valuetype v){
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
     if (!IsMemberMap(*M,k)){
-        int i = 0;
+        //int i = 0;
         copy_string(k, (*M).Elements[(*M).Count].nama_item);
         (*M).Elements[(*M).Count].qty = v;
         (*M).Count += 1;
@@ -81,17 +92,7 @@ void DeleteMap(Map *M, keytype k){
         (*M).Count -= 1;
     }
 }
-boolean IsMemberMap(Map M, keytype k){
-/* Mengembalikan true jika k adalah member dari M */
-    int i = 0;
-    while (i < M.Count ){
-        if (string_compare(k,M.Elements[i].nama_item) ){
-            return true;
-        }
-        i++;
-    }
-    return false;
-}
+
 
 
 void UpdateMap(Map *M, keytype k, valuetype v){
