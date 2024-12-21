@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ADTFile.h"
-#include "ADTMap.h"
+#include "ADTSetMap.h"
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
 /* jadi indeksnya antara 0.. MaxEl */

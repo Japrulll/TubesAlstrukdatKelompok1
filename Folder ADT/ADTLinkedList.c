@@ -3,7 +3,7 @@
 #include "ADTLinkedList.h"
 #include <stdlib.h>
 #include "ADTFile.h"
-#include "ADTMap.h"
+#include "ADTSetMap.h"
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/

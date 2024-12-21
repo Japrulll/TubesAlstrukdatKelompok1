@@ -1,5 +1,5 @@
-#ifndef map_H
-#define map_H
+#ifndef setmap_H
+#define setmap_H
 
 #include "boolean.h"
 

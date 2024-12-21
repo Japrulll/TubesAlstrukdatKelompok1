@@ -4,7 +4,7 @@
 #include "ADTFile.h"
 #include "ADTLinkedList.h"
 #include "ADTStack.h"
-#include "ADTMap.h"
+#include "ADTSetMap.h"
 void copyString(char* src, char* dest){
     int i = 0;
     while(src[i] != '\0'){

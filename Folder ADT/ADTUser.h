@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "ADTLinkedList.h"
 #include "ADTStack.h"
-#include "ADTMap.h"
+#include "ADTSetMap.h"
 #define MAX_LEN 100
 
 typedef struct {

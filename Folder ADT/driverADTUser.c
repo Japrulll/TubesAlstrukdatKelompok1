@@ -4,7 +4,7 @@
 #include "ADTFile.h"
 #include "ADTStack.h"
 #include "ADTLinkedList.h"
-#include "ADTMap.h"
+#include "ADTSetMap.h"
 
 //Fungsi khusus debugging, untuk mencetak isi dari StaticUserList
 void printUserList(StaticUserList *list) {

@@ -3,7 +3,7 @@
 #include "ADTItem.h"
 #include "ADTFile.h"
 #include "boolean.h"
-#include "ADTMap.h"
+#include "ADTSetMap.h"
 
 void initDinamicItemList(DinamicItemList *list){
     list->capacity = 2;
