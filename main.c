@@ -255,6 +255,16 @@ void dis_history(Stack *S){
 
 
 void dis_wishlist(){
+    printf("\n");
+    printf("----------------------WELCOME TO----------------------\n");
+    printf("\n");
+    printf("**     **  **  *****  **  **  **      **  *****  *****\n");
+    printf("**     **  **  *      **  **  **      **  *        *  \n");
+    printf("**     **  **  *      **  **  **      **  *        *  \n");
+    printf("**  ** **  **  *****  ******  **      **  *****    *  \n");
+    printf("** * * **  **      *  **  **  **      **      *    *  \n");
+    printf("***   ***  **      *  **  **  **      **      *    *  \n");
+    printf("**     **  **  *****  **  **  ******  **  *****    *  \n");
     while(!back){
         displayWishlist();
         AS_WORD();
