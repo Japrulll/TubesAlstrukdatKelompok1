@@ -47,3 +47,5 @@ contoh untuk ke menu file dapat ketik : `1` atau `file`
 command dapat juga di _chain_ dengan dipisah dengan spasi agar dapat menginput lebih dari satu (kecuali dalam menu cart)
 
 contoh ketika di login untuk meregistrasi dapat langsung `registrasi <username> <password>`
+
+Untuk menyimpan file dapat dilakukan pada menu save di main menu atau pada menu exit
