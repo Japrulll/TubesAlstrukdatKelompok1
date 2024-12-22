@@ -24,7 +24,7 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 
 // # store management and shopping
 #include "StoreList.h"
-#include "Cartj.h"
+#include "Cart.h"
 #include "WISHLIST.h"
 #include "history.h"
 
