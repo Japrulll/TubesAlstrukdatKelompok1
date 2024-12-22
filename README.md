@@ -25,7 +25,7 @@ Dalam sistem ini, terdapat fitur-fitur untuk menampilkan daftar barang, menambah
 1. Buka terminal dan set lokasi folder terminal ke tempat source codenya berada
 2. Copy command di bawah ini dan paste di terminal, lalu enter
 ```
-gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" -o main.exe
+gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c Cartj.c history.c WISHLIST.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" "./Folder ADT/ADTSetMap.c" "./Folder ADT/ADTLinkedlist.c" "./Folder ADT/ADTStack.c" -o main.exe
 ```
 3. Hasil kompile dapat berupa main.exe yang terletak pada lokasi folder tersebut
 
@@ -36,4 +36,11 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 `./main.exe`.
 4. Program akan mulai berjalan dalam terminal.
 
+## Cara Menavigasi Program
+![image](https://github.com/user-attachments/assets/3dfd6433-a040-41d6-a92a-2769dbab2401)
 
+Ketika dijalankan, program akan kelihatan seperti ini.
+Untuk menavigasi menu tersebut, bisa dengan mengetik angka yang tertulis atau mengetik kata pertama menu tersebut
+contoh untuk ke menu file dapat ketik : `1` atau `file`
+command dapat juga di _chain_ dengan dipisah dengan spasi agar dapat menginput lebih dari satu 
+contoh ketika di login untuk meregistrasi dapat langsung `registrasi <username> <password>`
