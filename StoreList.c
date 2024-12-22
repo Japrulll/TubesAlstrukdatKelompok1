@@ -33,7 +33,7 @@ void store_request(Antrian *antrian_barang, DinamicItemList list_barang) {
         ADVWORD();
     }
 
-    if (isIn(CurrentWord.TabWord, list_barang)) {
+    if (isIn( list_barang,CurrentWord.TabWord)) {
         printf("Barang %.*s sudah ada di store!\n", CurrentWord.Length, CurrentWord.TabWord);
     } else {
         Barang new_item;
