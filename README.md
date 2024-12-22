@@ -41,6 +41,9 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 
 Ketika dijalankan, program akan kelihatan seperti ini.
 Untuk menavigasi menu tersebut, bisa dengan mengetik angka yang tertulis atau mengetik kata pertama menu tersebut
+
 contoh untuk ke menu file dapat ketik : `1` atau `file`
+
 command dapat juga di _chain_ dengan dipisah dengan spasi agar dapat menginput lebih dari satu 
+
 contoh ketika di login untuk meregistrasi dapat langsung `registrasi <username> <password>`
