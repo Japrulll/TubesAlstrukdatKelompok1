@@ -293,6 +293,13 @@ void dis_wishlist(){
 }
 
 void profile(){
+    printf(" _______ ______   _______ _______ ___ ___     _______ \n");
+    printf("|       |    _ | |       |       |   |   |   |       |\n");
+    printf("|    _  |   | || |   _   |    ___|   |   |   |    ___|\n");
+    printf("|   |_| |   |_||_|  | |  |   |___|   |   |   |   |___ \n");
+    printf("|    ___|    __  |  |_|  |    ___|   |   |___|    ___|\n");
+    printf("|   |   |   |  | |       |   |   |   |       |   |___ \n");
+    printf("|___|   |___|  |_|_______|___|   |___|_______|_______| \n");
     printf("============ [Current Account] ==============\n");
     printf("current account : %s\n",current.name);
     printf("current password : %s\n",current.password);
@@ -431,6 +438,13 @@ int main(){
                 if(StrToInt(CurrentWord.TabWord) == 1
                     || compareStrings(CurrentWord.TabWord,"work")
                     || compareStrings(CurrentWord.TabWord,"WORK")){
+                    printf(" _     _ _______ ______   ___   _ \n");
+                    printf("| | _ | |       |    _ | |   | | |\n");
+                    printf("| || || |   _   |   | || |   |_| |\n");
+                    printf("|       |  | |  |   |_||_|      _|\n");
+                    printf("|       |  |_|  |    __  |     |_ \n");
+                    printf("|   _   |       |   |  | |    _  |\n");
+                    printf("|__| |__|_______|___|  |_|___| |_| \n");
                     work(&current.money);
                     users.users[current_index].money = current.money;
                     inputdelay();
