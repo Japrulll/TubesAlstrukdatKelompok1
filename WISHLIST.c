@@ -4,13 +4,12 @@
 #include "./Folder ADT/mesinkata.h"
 #include "./Folder ADT/ADTFile.h"
 #include "./Folder ADT/ADTStack.h"
-#include "./Folder ADT/ADTItem.h"
 
 
 void WISHLISTADD (List *wishlist, DinamicItemList items){
     char barang[100];
     printf("Masukkan nama barang yang ingin ditambah : ");
-    STARTWORDBLANKS();
+    AS_WORDBLANKS();
     while ( !EndWord ) {
         ADVWORDBLANKS();
     }
@@ -20,27 +19,27 @@ void WISHLISTADD (List *wishlist, DinamicItemList items){
     }
     barang[CurrentWord.Length] = '\0';
 
-    if(!isIn(items, barang)){
+    if(!isIn(items,barang)){
         printf("Tidak ada barang dengan nama %s\n",barang);
     }
     else{
         if (IsEmptyLL(*wishlist)){
             InsVFirst(wishlist,barang);
-            addressLL P = First(*wishlist);
+            addressLink P = First(*wishlist);
             printf("Berhasil menambahkan ");
             printf("%s", Info(P));
             printf(" ke dalam wishlist!\n");
         }
         else {
-            if((SearchLL(*wishlist, barang))==NilList){
+            if((SearchLL(*wishlist, barang))==NilLL){
                 InsVLast(wishlist,barang);
-                addressLL P = SearchLL(*wishlist, barang);
+                addressLink P = SearchLL(*wishlist, barang);
                 printf("Berhasil menambahkan ");
                 printf("%s", Info(P));
                 printf(" ke dalam wishlist.\n");
             }
             else{
-                addressLL P = SearchLL(*wishlist, barang);
+                addressLink P = SearchLL(*wishlist, barang);
                 printf("%s", Info(P));
                 printf(" sudah ada di dalam wishlist!\n");
             }   
@@ -65,10 +64,10 @@ void WISHLISTREMOVE (List *wishlist){
         int pilihan=0;
         while(pilihan<1 || pilihan>2){
             printf("Masukkan pilihan anda (1) atau (2) : ");
-            STARTWORDBLANKS();
-            while ( !EndWord ) {
-                ADVWORDBLANKS();
-            }
+            AS_WORD();
+            // while ( !EndWord ) {
+            //     ADVWORD();
+            // }
             pilihan = StrToInt(CurrentWord.TabWord);
             if (pilihan<1 || pilihan>2){
                 printf("Input tidak valid. Mohon ulangi! ");
@@ -76,9 +75,9 @@ void WISHLISTREMOVE (List *wishlist){
         }
         if (pilihan==1){
             printf("Masukkan nama barang yang ingin dihapus : ");
-            STARTWORDBLANKS();
+            AS_WORDBLANKS();
             while ( !EndWord ) {
-                ADVWORDBLANKS();
+                ADVWORD();
             }
             
             for (int i=0;i<CurrentWord.Length;i++){
@@ -86,7 +85,7 @@ void WISHLISTREMOVE (List *wishlist){
             }
             barang[CurrentWord.Length] = '\0';
             
-            if((SearchLL(*wishlist, barang))==NilList){
+            if((SearchLL(*wishlist, barang))==NilLL){
                 printf("Penghapusan gagal dilakukan! ");
                 printf("%s", barang);
                 printf(" tidak ditemukan di dalam wishlist.\n");
@@ -101,16 +100,16 @@ void WISHLISTREMOVE (List *wishlist){
             int indeks = 0;
             while(indeks > NbElmt(*wishlist) || indeks < 1){
                 printf("Masukkan indeks barang yang ingin dihapus : ");
-                STARTWORDBLANKS();
+                AS_WORD();
                 while ( !EndWord ) {
-                    ADVWORDBLANKS();
+                    ADVWORD();
                 }
                 indeks = StrToInt(CurrentWord.TabWord);
                 if (indeks > NbElmt(*wishlist) || indeks < 1){
                     printf("Input anda tidak valid. Silakan ulang! ");
                 }
             }
-            addressLL P = First(*wishlist);
+            addressLink P = First(*wishlist);
             int idx = 1;
             while (idx < indeks) {
                 P = Next(P);
@@ -125,50 +124,62 @@ void WISHLISTREMOVE (List *wishlist){
 
 
 void WISHLISTSWAP (List *wishlist){
-    int i=0,j=0,k=0;
+    int i=0,j=0;
 
     if(NbElmt(*wishlist) == 1 || NbElmt(*wishlist) == 0){
         printf("Anda tidak dapat melakukan wishlist swap saat ini\n");
         printf("karena wishlist anda kosong atau hanya berisi 1 barang!\n");
     }
     else{
-        printf("Anda diminta memasukkan indeks barang yang ingin dilakukan swap! (i) (j)\n");
+        printf("Anda diminta memasukkan indeks barang yang ingin dilakukan swap! (i) dan (j)\n");
         while(i>NbElmt(*wishlist) || i<1 || j>NbElmt(*wishlist) || j<1){
-            printf("Indeks <i> <j> = ");
-            STARTWORD();
-            if (!EndWord) {
-                i = StrToInt(CurrentWord.TabWord);
+            printf("Indeks (i) = ");
+            AS_WORD();
+            // while ( !EndWord ) {
+            //     ADVWORD();
+            // }
+            i = StrToInt(CurrentWord.TabWord);
+            
+            printf("Indeks (j) = ");
+            AS_WORD();
+            while ( !EndWord ) {
                 ADVWORD();
-                j = StrToInt(CurrentWord.TabWord);
             }
+            j = StrToInt(CurrentWord.TabWord);
+
             if(i>NbElmt(*wishlist) || i<1 || j>NbElmt(*wishlist) || j<1){
                 printf("indeks i atau j atau keduanya tidak valid.\n");
                 printf("Silakan masukkan lagi input indeks yang valid!");
             }
         }
 
-        addressLL P1 = First(*wishlist);
-        addressLL P2 = First(*wishlist);
+        addressLink P1 = First(*wishlist);
+        addressLink P2 = First(*wishlist);
         int idx = 1;
-        // Cari elemen ke-i
-        while (P1 != NilList && idx < i) {
+
+        // Temukan elemen ke-i
+        while (P1 != NilLL && idx < i) {
             P1 = Next(P1);
             idx++;
         }
+
         // Reset indeks dan cari elemen ke-j
         idx = 1;
-        while (P2 != NilList && idx < j) {
+        while (P2 != NilLL && idx < j) {
             P2 = Next(P2);
             idx++;
         }
         char temp[100];
         int k;
+
         for (k = 0; k < 100; k++) {
             temp[k] = P1->info[k];
         }
+
         for (k = 0; k < 100; k++) {
             P1->info[k] = P2->info[k];
         }
+
         for (k = 0; k < 100; k++) {
             P2->info[k] = temp[k];
         }
@@ -188,10 +199,10 @@ void WISHLISTSHOW (List *wishlist){
         printf("Wishlist kamu kosong!\n");
     }
     else{
-        addressLL P = First(*wishlist);
+        addressLink P = First(*wishlist);
         int nomor=1;
         printf("Berikut ini adalah isi wishlist kamu: \n");
-        while (P != NilList){
+        while (P != NilLL){
             printf("%d ",nomor);
             printf("%s\n", Info(P));
             nomor++;
@@ -204,15 +215,6 @@ void WISHLISTSHOW (List *wishlist){
 /*
 int main(){
     List wishlist;
-
-    DinamicItemList Items;
-    initDinamicItemList(&Items);
-    addItem(&Items, 20, "hans j");
-    addItem(&Items, 20, "joseph b");
-    addItem(&Items, 20, "barmen w");
-    addItem(&Items, 20, "wijaya s");
-    addItem(&Items, 20, "silitonga h");
-
     CreateEmptyLL (&wishlist);
     int mulai = 1;
     while (mulai==1){
@@ -221,7 +223,7 @@ int main(){
         scanf("%d",&masukan);
         getchar();
         if (masukan==1){
-            WISHLISTADD (&wishlist,Items);
+            WISHLISTADD (&wishlist);
         }
         else if (masukan==2){
             WISHLISTREMOVE (&wishlist);
@@ -237,7 +239,6 @@ int main(){
         }
         else{
             printf("input tidak valid. Masukkan ulang!");
-            mulai=0;
         }
     }
 

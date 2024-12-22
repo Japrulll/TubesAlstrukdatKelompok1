@@ -58,6 +58,8 @@ void CopyWordBlanks();
 
 void AS_WORD();
 
+void AS_WORDBLANKS();
 
+void spitnamaharga(Word src, char*produk, int *jumlah);
 
 #endif

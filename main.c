@@ -1,7 +1,7 @@
 // imports
 
 /*compile paste board
-gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c Cartj.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" "./Folder ADT/ADTSetMap.c" "./Folder ADT/ADTLinkedlist.c" "./Folder ADT/ADTStack.c" -o main.exe
+gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c Cartj.c history.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" "./Folder ADT/ADTSetMap.c" "./Folder ADT/ADTLinkedlist.c" "./Folder ADT/ADTStack.c" -o main.exe
 */
 
 // built in module
@@ -26,6 +26,7 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 #include "StoreList.h"
 #include "Cartj.h"
 #include "WISHLIST.c"
+#include "history.h"
 
 // ADT formats and tools
 #include "./Folder ADT/ADTFile.h"
@@ -66,6 +67,7 @@ void start(DinamicItemList *item,StaticUserList *user){
     //  2
     //  100 admin alstrukdatkeren
     //  25 praktikan kerenbangetkak
+
 
     Stack nill;
     CreateEmptyS(&nill);
@@ -183,6 +185,7 @@ void dis_store(){
 
 void dis_cart(){
     char produk[10];
+    int jumlah;
     while(!back){
         displayCart();
         AS_WORD();
@@ -194,21 +197,26 @@ void dis_cart(){
         else if(StrToInt(CurrentWord.TabWord) == 1
             || compareStrings(CurrentWord.TabWord,"add")
             || compareStrings(CurrentWord.TabWord,"ADD")){
-            printf("Tuliskan nama item yang ingin ditambahkan:\n");
-            AS_WORD();
-            copyString(CurrentWord.TabWord,produk);
-            AS_WORD();
-            cartadd(&current.keranjang,items,produk,StrToInt(CurrentWord.TabWord));
+            printf("Tuliskan nama item dan jumlah yang ingin ditambahkan dipisahkan dengan spasi:\n");
+            AS_WORDBLANKS();
+            spitnamaharga(CurrentWord,produk,&jumlah);
+            printf("%s",CurrentWord.TabWord);
+            printf("%s %d\n",produk,jumlah);
+            if (jumlah != -1){
+                cartadd(&current.keranjang,items,produk,jumlah);
+            }
+
         }
         
         else if(StrToInt(CurrentWord.TabWord) == 2
             || compareStrings(CurrentWord.TabWord,"remove")
             || compareStrings(CurrentWord.TabWord,"REMOVE")){
-            printf("Tuliskan nama barang yang ingin diremove\n");
-            AS_WORD();
-            copyString(CurrentWord.TabWord,produk);
-            AS_WORD(); 
-            cartremove(&current.keranjang,items,produk,StrToInt(CurrentWord.TabWord));
+            printf("Tuliskan nama barang dan jumlahnya yang ingin diremove dipisah dengan spasi\n");
+            AS_WORDBLANKS();
+            spitnamaharga(CurrentWord,produk,&jumlah);
+            if (jumlah != -1){
+                cartremove(&current.keranjang,items,produk,jumlah);
+            }
         }
 
         else if(StrToInt(CurrentWord.TabWord) == 3
@@ -233,13 +241,9 @@ void dis_cart(){
 }
 
 void dis_history(Stack *S){
-    if (Top(*S) == NilS){
-        printf("empty\n");
-        return;
-    }
-    for (int i = 0; i <= S->TOP; i++){
-        printf("%d %s\n", S->T[i].totalHarga, S->T[i].namaBarang);
-    }
+    printf("Tuliskan jumlah history yang ingin diprint :\n");
+    AS_WORD();
+    history(S,StrToInt(CurrentWord.TabWord));
 }
 
 
@@ -247,7 +251,12 @@ void dis_wishlist(){
     while(!back){
         displayWishlist();
         AS_WORD();
-        if (StrToInt(CurrentWord.TabWord) == 1
+        if (StrToInt(CurrentWord.TabWord) == 0
+            || compareStrings(CurrentWord.TabWord,"display")
+            || compareStrings(CurrentWord.TabWord,"display")){
+            store_display(items);
+        }
+        else if (StrToInt(CurrentWord.TabWord) == 1
             || compareStrings(CurrentWord.TabWord,"add")
             || compareStrings(CurrentWord.TabWord,"ADD")){
             WISHLISTADD(&current.wishlist,items);
@@ -299,7 +308,7 @@ void fstatus(){
 
 
 int main(){
-    printf("run\n");
+
 
     // program states
     active = true;

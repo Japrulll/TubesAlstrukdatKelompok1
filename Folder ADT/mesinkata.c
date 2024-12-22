@@ -86,6 +86,7 @@ void ADVWORDBLANKS(){
 }
 
 void CopyWord(){
+    boolean quote = false;
     for (int i = 0;i<100;i++){
         if (CurrentWord.TabWord[i]=='\0'){
             break;
@@ -95,7 +96,20 @@ void CopyWord(){
         }
     }
     int idx = 0;
-    while ((currentChar != MARK && currentChar != BLANK) && (idx < NMax)){
+    
+    while ((currentChar != MARK) && (idx < NMax)){
+        if(currentChar == '"'){
+            if (quote){
+                quote = false;
+            }
+            else{
+                quote = true;
+            }
+            ADV();
+        }
+        if (currentChar == BLANK && !quote){
+            break;
+        }
         CurrentWord.TabWord[idx] = GetCC();
         ADV();
         idx++;
@@ -147,6 +161,47 @@ void AS_WORD(){
     else{
         ADVWORD();
     }
+}
+
+void AS_WORDBLANKS(){
+    if (EndWord){
+        STARTWORDBLANKS();
+    }
+    else{
+        ADVWORDBLANKS();
+    }
+} 
+
+void spitnamaharga(Word src, char*produk, int *jumlah){
+    int len = src.Length;
+    char cur = '\0';
+    int l = len;
+    char jum[10];
+    int ids=0;
+
+    for (;l>=0;l--){
+        cur = src.TabWord[l];
+        if (cur ==' '){
+            ids =l;
+            break;
+        }
+    }
+    int k = 0;
+    l++;
+    for (;l <=len;l++){
+        jum[k] = src.TabWord[l];
+        k++;
+        // printf("jj\n");
+    }
+    jum[k] = '\0';
+    *jumlah = StrToInt(jum);
+    if (*jumlah == -1){
+        return;
+    }
+    for (int i = 0; i<ids;i++){
+        produk[i] = src.TabWord[i];
+    }
+    produk[ids] = '\0';
 }
 
 // boolean isIn(Word word, BarangDin list_barang) {
