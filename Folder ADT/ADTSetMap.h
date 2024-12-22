@@ -4,7 +4,7 @@
 #include "boolean.h"
 
 #define NilMap 0
-#define Undefined -696969
+#define Undefined 0
 
 typedef char keytype[100];
 typedef int valuetype;
