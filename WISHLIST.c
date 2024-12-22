@@ -20,13 +20,13 @@ void WISHLISTADD (List *wishlist, DinamicItemList items){
     }
     barang[CurrentWord.Length] = '\0';
 
-    if(!isIn(barang,items)){
+    if(!isIn(items, barang)){
         printf("Tidak ada barang dengan nama %s\n",barang);
     }
     else{
         if (IsEmptyLL(*wishlist)){
             InsVFirst(wishlist,barang);
-            address P = First(*wishlist);
+            addressLL P = First(*wishlist);
             printf("Berhasil menambahkan ");
             printf("%s", Info(P));
             printf(" ke dalam wishlist!\n");
@@ -34,13 +34,13 @@ void WISHLISTADD (List *wishlist, DinamicItemList items){
         else {
             if((SearchLL(*wishlist, barang))==NilList){
                 InsVLast(wishlist,barang);
-                address P = SearchLL(*wishlist, barang);
+                addressLL P = SearchLL(*wishlist, barang);
                 printf("Berhasil menambahkan ");
                 printf("%s", Info(P));
                 printf(" ke dalam wishlist.\n");
             }
             else{
-                address P = SearchLL(*wishlist, barang);
+                addressLL P = SearchLL(*wishlist, barang);
                 printf("%s", Info(P));
                 printf(" sudah ada di dalam wishlist!\n");
             }   
@@ -110,7 +110,7 @@ void WISHLISTREMOVE (List *wishlist){
                     printf("Input anda tidak valid. Silakan ulang! ");
                 }
             }
-            address P = First(*wishlist);
+            addressLL P = First(*wishlist);
             int idx = 1;
             while (idx < indeks) {
                 P = Next(P);
@@ -147,8 +147,8 @@ void WISHLISTSWAP (List *wishlist){
             }
         }
 
-        address P1 = First(*wishlist);
-        address P2 = First(*wishlist);
+        addressLL P1 = First(*wishlist);
+        addressLL P2 = First(*wishlist);
         int idx = 1;
         // Cari elemen ke-i
         while (P1 != NilList && idx < i) {
@@ -188,7 +188,7 @@ void WISHLISTSHOW (List *wishlist){
         printf("Wishlist kamu kosong!\n");
     }
     else{
-        address P = First(*wishlist);
+        addressLL P = First(*wishlist);
         int nomor=1;
         printf("Berikut ini adalah isi wishlist kamu: \n");
         while (P != NilList){
