@@ -40,10 +40,10 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 ![image](https://github.com/user-attachments/assets/3dfd6433-a040-41d6-a92a-2769dbab2401)
 
 Ketika dijalankan, program akan kelihatan seperti ini.
-Untuk menavigasi menu tersebut, bisa dengan mengetik angka yang tertulis atau mengetik kata pertama menu tersebut
+Untuk menavigasi menu tersebut, bisa dengan mengetik angka yang tertulis atau mengetik nama fungsinya
 
 contoh untuk ke menu file dapat ketik : `1` atau `file`
 
-command dapat juga di _chain_ dengan dipisah dengan spasi agar dapat menginput lebih dari satu 
+command dapat juga di _chain_ dengan dipisah dengan spasi agar dapat menginput lebih dari satu (kecuali dalam menu cart)
 
 contoh ketika di login untuk meregistrasi dapat langsung `registrasi <username> <password>`
