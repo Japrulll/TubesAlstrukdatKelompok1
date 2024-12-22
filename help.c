@@ -64,10 +64,10 @@ void displayHelpMain(){
     printf("=====[ Menu PURRMART ]=====\n");
     printf("    1. WORK -> Untuk bekerja\n");
     printf("    2. WORK CHALLENGE -> Untuk mengerjakan challenge\n");
-    printf("    3. STORE\n");
-    printf("    4. CART\n");
-    printf("    5. HISTORY\n");
-    printf("    6. WISHLIST\n");
+    printf("    3. STORE -> Untuk mengurus toko\n");
+    printf("    4. CART -> Untuk membeli barang\n");
+    printf("    5. HISTORY -> Untuk melihat sejarah pembelian\n");
+    printf("    6. WISHLIST -> Untuk menyimpan wishlist\n");
     printf("    7. LOGOUT -> Untuk keluar dari sesi\n");
     printf("    8. SAVE -> Untuk menyimpan state ke dalam file\n");
     printf("    9. Back -> Balik ke setting\n");
@@ -115,11 +115,11 @@ void displayCart(){
     printf("|      _|       |    __  |   |  \n");
     printf("|     |_|   _   |   |  | |   |  \n");
     printf("|_______|__| |__|___|  |_|___|   \n");
-    printf("    0. DISPLAY STORE\n");
-    printf("    1. CART ADD\n");
-    printf("    2. CART REMOVE\n");
-    printf("    3. CART SHOW\n");    
-    printf("    4. CART PAY\n");
+    printf("    0. DISPLAY STORE -> Mendisplay isi toko\n");
+    printf("    1. CART ADD -> Menambahkan barang ke keranjang\n");
+    printf("    2. CART REMOVE -> Menggeluarkan barang dari keranjang\n");
+    printf("    3. CART SHOW -> Menambahkan isi keranjang\n");    
+    printf("    4. CART PAY -> Menampilkan menu bayar\n");
     printf("    5. Back -> Balik ke setting\n"); 
 
 }
@@ -132,10 +132,11 @@ void displayWishlist(){
     printf("|       |   |_____  |       |   |___|   |_____  | |   |  \n");
     printf("|   _   |   |_____| |   _   |       |   |_____| | |   |  \n");
     printf("|__| |__|___|_______|__| |__|_______|___|_______| |___|   \n");
-    printf("    1. WISHLIST ADD\n");
-    printf("    2. WISHLIST SWAP\n");
-    printf("    3. WISHLIST REMOVE\n");
-    printf("    4. WISHLIST CLEAR\n");
-    printf("    5. WISHLIST SHOW\n");
+    printf("    0. DISPLAY STORE -> Mendisplay isi toko\n");
+    printf("    1. WISHLIST ADD -> Menambahkan barang ke wishlist\n");
+    printf("    2. WISHLIST SWAP -> Mengubah posisi barang di wishlist\n");
+    printf("    3. WISHLIST REMOVE -> Menghapuskan suatu barang dari wishlist\n");
+    printf("    4. WISHLIST CLEAR -> Menghapuskan semua barang dari wishlist\n");
+    printf("    5. WISHLIST SHOW -> Menunjukan isi wishlist\n");
     printf("    6. Back -> Balik ke setting\n"); 
 }

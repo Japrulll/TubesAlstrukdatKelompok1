@@ -1,7 +1,7 @@
 // imports
 
 /*compile paste board
-gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c Cartj.c history.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" "./Folder ADT/ADTSetMap.c" "./Folder ADT/ADTLinkedlist.c" "./Folder ADT/ADTStack.c" -o main.exe
+gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c StoreList.c Cartj.c history.c WISHLIST.c "./Folder ADT/ADTFile.c" "./Folder ADT/ADTItem.c" "./Folder ADT/ADTUser.c" "./Folder ADT/mesinkata.c" "./Folder ADT/mesinkarakter.c" "./Folder ADT/queue.c" "./Folder ADT/ADTSetMap.c" "./Folder ADT/ADTLinkedlist.c" "./Folder ADT/ADTStack.c" -o main.exe
 */
 
 // built in module
@@ -25,7 +25,7 @@ gcc main.c help.c save.c load.c masukdaftar.c work.c tebak_angka.c WORDL3.c Stor
 // # store management and shopping
 #include "StoreList.h"
 #include "Cartj.h"
-#include "WISHLIST.c"
+#include "WISHLIST.h"
 #include "history.h"
 
 // ADT formats and tools
@@ -405,7 +405,7 @@ int main(){
                 && loaded == true){
             while(!back){
                 displayHelpLogin();
-                STARTWORD();
+                AS_WORD();
                 if(StrToInt(CurrentWord.TabWord) == 1
                     || compareStrings(CurrentWord.TabWord,"register")
                     || compareStrings(CurrentWord.TabWord,"REGISTER")){
@@ -421,7 +421,12 @@ int main(){
                 else if(StrToInt(CurrentWord.TabWord) == 3
                     || compareStrings(CurrentWord.TabWord,"profile")
                     || compareStrings(CurrentWord.TabWord,"PROFILE")){
-                    profile();
+                    if (logged){
+                        profile();
+                    }
+                    else{
+                        printf("User belum login\n");
+                    }
                     inputdelay();
                 }
                 else if(StrToInt(CurrentWord.TabWord) == 4
@@ -441,7 +446,7 @@ int main(){
                 && logged == true){
             while(!back){
                 displayHelpMain();
-                STARTWORD();
+                AS_WORD();
                 if(StrToInt(CurrentWord.TabWord) == 1
                     || compareStrings(CurrentWord.TabWord,"work")
                     || compareStrings(CurrentWord.TabWord,"WORK")){
@@ -540,7 +545,5 @@ int main(){
         }
 
     }
-
-
     return 0;
 }
