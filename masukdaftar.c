@@ -82,7 +82,7 @@ void registerUser(StaticUserList *userList) {  // Tambahkan parameter userList
     printf("Username: ");
     STARTWORD();
     
-    if (EndWord) {
+    if (compareStrings(CurrentWord.TabWord,"")) {
         printf("Username tidak boleh kosong. Silakan coba lagi.\n");
         return;
     }
@@ -114,7 +114,7 @@ void registerUser(StaticUserList *userList) {  // Tambahkan parameter userList
     printf("Password: ");
     STARTWORD();
     
-    if (EndWord) {
+    if (compareStrings(CurrentWord.TabWord,"")) {
         printf("Password tidak boleh kosong. Silakan coba lagi.\n");
         return;
     }
