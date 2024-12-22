@@ -1,5 +1,4 @@
 #include <stdio.h>
-// #include "Barang.h"
 #include "./Folder ADT/mesinkata.h"
 #include "./Folder ADT/queue.h"
 #include "./Folder ADT/ADTFile.h"
@@ -19,6 +18,7 @@ int InputToInt_store() {
 }
 
 void store_display(DinamicItemList list_barang){
+    printf("List Barang di Toko:\n");
     if (!IsEmpty(list_barang)){
         for (int i = 0; i < Length(list_barang); i++){
             printf("%d. %s %d\n", i+1, list_barang.items[i].name, list_barang.items[i].price);
@@ -33,7 +33,7 @@ void store_request(Antrian *antrian_barang, DinamicItemList list_barang) {
         ADVWORD();
     }
 
-    if (isIn( list_barang,CurrentWord.TabWord)) {
+    if (isIn(list_barang, CurrentWord.TabWord)) {
         printf("Barang %.*s sudah ada di store!\n", CurrentWord.Length, CurrentWord.TabWord);
     } else {
         Barang new_item;

@@ -53,10 +53,11 @@ void work(int *balance) {
     Word chosenJob;
     printf("\nMasukkan pekerjaan yang dipilih: ");
     
-    STARTWORD();
+    STARTWORDBLANKS();
     chosenJob = CurrentWord;
     
     int jobFound = 0;
+    // printf("%s\n",chosenJob.TabWord);
     for (int i = 0; i < MAX_JOBS; i++) {
         if (compareStrings(chosenJob.TabWord, jobs[i].jobName)) {
             jobFound = 1;

@@ -10,7 +10,7 @@
 void WISHLISTADD (List *wishlist, DinamicItemList items){
     char barang[100];
     printf("Masukkan nama barang yang ingin ditambah : ");
-    STARTWORDBLANKS();
+    AS_WORDBLANKS();
     while ( !EndWord ) {
         ADVWORDBLANKS();
     }

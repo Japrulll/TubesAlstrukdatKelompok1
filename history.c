@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "./Folder ADT/ADTStack.h"
 
-void dis_history(Stack *out, int N){
+void history(Stack *out, int N){
     if (N > out->TOP){
         N = out->TOP;
     }
@@ -20,7 +20,7 @@ void dis_history(Stack *out, int N){
         int totalHarga;
         char namaBarang[100];
         Pop(out, &totalHarga, namaBarang);
-        printf("%d %s\n", totalHarga, namaBarang);  
+        printf("%d. %d %s\n", i+1, totalHarga, namaBarang);  
         Push(&tempStack, totalHarga, namaBarang);
     }
     while (!IsEmptyS(tempStack)){
