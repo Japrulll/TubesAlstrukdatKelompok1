@@ -241,6 +241,13 @@ void dis_cart(){
 }
 
 void dis_history(Stack *S){
+    printf(" __   __ ___ _______ _______ _______ ______   __   __ \n");
+    printf("|  | |  |   |       |       |       |    _ | |  | |  | \n");
+    printf("|  |_|  |   |  _____|_     _|   _   |   | || |  |_|  | \n");
+    printf("|       |   | |_____  |   | |  | |  |   |_||_|       | \n");
+    printf("|       |   |_____  | |   | |  |_|  |    __  |_     _| \n");
+    printf("|   _   |   |_____| | |   | |       |   |  | | |   |  \n");
+    printf("|__| |__|___|_______| |___| |_______|___|  |_| |___|   \n");
     printf("Tuliskan jumlah history yang ingin diprint :\n");
     AS_WORD();
     history(S,StrToInt(CurrentWord.TabWord));
